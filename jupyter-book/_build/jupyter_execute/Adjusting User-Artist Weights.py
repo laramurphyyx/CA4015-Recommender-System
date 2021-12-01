@@ -25,11 +25,11 @@ dataframe_names = [
     'user_artists']
 
 file_names = [
-    'data/user_friends.dat',
-    'data/user_taggedartists.dat',
-    'data/artists.dat',
-    'data/tags.dat',
-    'data/user_artists.dat']
+    '../data/user_friends.dat',
+    '../data/user_taggedartists.dat',
+    '../data/artists.dat',
+    '../data/tags.dat',
+    '../data/user_artists.dat']
 
 
 # In[3]:
@@ -44,7 +44,7 @@ for (dataframe, file) in zip(dataframe_names, file_names):
 
 # ## Exploring the data
 
-# In[261]:
+# In[4]:
 
 
 plt.hist(user_artists['weight'], bins=300);
@@ -54,7 +54,7 @@ plt.hist(user_artists['weight'], bins=300);
 # 
 # By running some basic commands, I have discovered that 95% of weights are less than or equal to 2,328.
 
-# In[364]:
+# In[5]:
 
 
 plt.hist(user_artists[user_artists['weight']<=2328]['weight'], bins = 30)
@@ -94,7 +94,7 @@ plt.gca().set(title='Distribution of Weights');
 
 # ## Investigating Users' Average Weight
 
-# In[10]:
+# In[6]:
 
 
 distribution_of_weights_given = (
@@ -104,13 +104,13 @@ distribution_of_weights_given = (
 )
 
 
-# In[12]:
+# In[7]:
 
 
 distribution_of_weights_given.columns = ['weight', 'users_avg']
 
 
-# In[13]:
+# In[8]:
 
 
 data = distribution_of_weights_given['users_avg']
@@ -126,7 +126,7 @@ plt.gca().set(
 
 # ## Investigating 5 Users' Distributions
 
-# In[272]:
+# In[9]:
 
 
 data = user_artists[user_artists['userID']==2]['weight']
@@ -138,7 +138,7 @@ plt.gca().set(
 );
 
 
-# In[267]:
+# In[10]:
 
 
 data = user_artists[user_artists['userID']==6]['weight']
@@ -150,7 +150,7 @@ plt.gca().set(
 );
 
 
-# In[269]:
+# In[11]:
 
 
 data = user_artists[user_artists['userID']==7]['weight']
@@ -162,7 +162,7 @@ plt.gca().set(
 );
 
 
-# In[270]:
+# In[12]:
 
 
 data = user_artists[user_artists['userID']==700]['weight']
@@ -174,7 +174,7 @@ plt.gca().set(
 );
 
 
-# In[271]:
+# In[13]:
 
 
 data = user_artists[user_artists['userID']==2100]['weight']
@@ -192,27 +192,10 @@ plt.gca().set(
 # 
 # Let's investigate for some of these users, how they would be processed if treated like a normal distribution.
 
-# ## User-based option
-
-# There are different methods we can try to use to identify the star rating for each user-artist match.
-# 
-# #### Option 1:
-# Assume equal distribution of ratings, and assign the bottom 20% 1-star, the next 20% 2-star, the next 20% 3-star, etc.
-# 
-# The drawbacks of this option:
-# - It is not user specific, the percentages (20%) will be the same for all users.
-# - It is not accurately representative of the weights.
-# 
-# #### Option 2:
-# Assume that the opinions of users follow a normal distribution, where 1 and 5 star ratings occur less frequently, and 3 star ratings occur most frequently. 
-# 
-# The drawbacks of this option:
-# - Since the distribution (upon brief analysis) of each user's weights follow more of a gamma/exponetial distribution, the normal distribution wil have to be created as a standard guideline and will not be user-specific.
-
 # <a id=’plotting_mean_std’></a>
 # ## Plotting the Mean and Standard Deviation on Users' Weight Distribution
 
-# In[279]:
+# In[14]:
 
 
 data = user_artists[user_artists['userID']==2]['weight']
@@ -236,7 +219,7 @@ plt.gca().set(
 );
 
 
-# In[280]:
+# In[15]:
 
 
 data = user_artists[user_artists['userID']==6]['weight']
@@ -260,7 +243,7 @@ plt.gca().set(
 );
 
 
-# In[281]:
+# In[16]:
 
 
 data = user_artists[user_artists['userID']==7]['weight']
@@ -283,7 +266,7 @@ plt.gca().set(
 );
 
 
-# In[282]:
+# In[17]:
 
 
 data = user_artists[user_artists['userID']==700]['weight']
@@ -307,7 +290,7 @@ plt.gca().set(
 );
 
 
-# In[283]:
+# In[18]:
 
 
 data = user_artists[user_artists['userID']==2100]['weight']
@@ -339,7 +322,7 @@ plt.gca().set(
 
 # ## Removing Outliers for User #7
 
-# In[285]:
+# In[19]:
 
 
 user7 = user_artists[user_artists['userID']==7]
@@ -347,7 +330,7 @@ user7_mean = user7['weight'].mean()
 user7_std = np.std(user7['weight'])
 
 
-# In[293]:
+# In[20]:
 
 
 user7_adjusted = user7[abs(user7['weight']-user7_mean)<(2*user7_std)]
@@ -355,7 +338,7 @@ user7_mean_adjusted = user7_adjusted['weight'].mean()
 user7_std_adjusted = np.std(user7_adjusted['weight'])
 
 
-# In[306]:
+# In[21]:
 
 
 plt.hist(user7_adjusted, bins = 50)
@@ -382,7 +365,7 @@ plt.gca().set(
 
 # # Creating a Loop to add Star-Ratings based on Normal Distribution
 
-# In[307]:
+# In[22]:
 
 
 ## Creating a dictionary to discover each users mean and standard deviation
@@ -396,7 +379,7 @@ for userID in user_artists.userID.unique():
     stds[userID] = user_std
 
 
-# In[308]:
+# In[23]:
 
 
 user_artists['rating'] = 0
@@ -404,7 +387,7 @@ user_artists['mean'] = 0
 user_artists['std'] = 0
 
 
-# In[309]:
+# In[24]:
 
 
 def find_mean(row):
@@ -429,7 +412,7 @@ def find_rating(row):
         return 5
 
 
-# In[310]:
+# In[25]:
 
 
 user_artists['mean'] = user_artists.apply(lambda row: find_mean(row), axis=1)
@@ -437,7 +420,7 @@ user_artists['std'] = user_artists.apply(lambda row: find_std(row), axis=1)
 user_artists['rating'] = user_artists.apply(lambda row: find_rating(row), axis=1)
 
 
-# In[323]:
+# In[26]:
 
 
 plt.hist(user_artists['rating']);
@@ -451,14 +434,14 @@ plt.hist(user_artists['rating']);
 
 # ## Adjusting Star-Ratings to Allow for Outlier Exclusion
 
-# In[324]:
+# In[27]:
 
 
 ## Removing any weight that is above 2 standard deviations away from the mean
 adjusted_user_artists = user_artists[abs(user_artists['weight']-user_artists['mean'])<(2*user_artists['std'])]
 
 
-# In[325]:
+# In[28]:
 
 
 ## Dropping and recreating the mean, standard deviation and rating columns
@@ -469,7 +452,7 @@ adjusted_user_artists['mean'] = 0
 adjusted_user_artists['std'] = 0
 
 
-# In[326]:
+# In[29]:
 
 
 ## Finding the new means and standard deviations
@@ -484,7 +467,7 @@ for userID in adjusted_user_artists.userID.unique():
     stds[userID] = user_std
 
 
-# In[327]:
+# In[30]:
 
 
 def find_mean(row, means):
@@ -509,7 +492,7 @@ def find_rating(row):
         return 5
 
 
-# In[328]:
+# In[31]:
 
 
 ## Recalculate the means, standard deviations and ratings
@@ -519,7 +502,7 @@ adjusted_user_artists['std'] = adjusted_user_artists.apply(lambda row: find_std(
 adjusted_user_artists['rating'] = adjusted_user_artists.apply(lambda row: find_rating(row), axis=1)
 
 
-# In[331]:
+# In[32]:
 
 
 plt.hist(adjusted_user_artists['rating'], bins=10);
@@ -531,13 +514,13 @@ plt.hist(adjusted_user_artists['rating'], bins=10);
 
 # ## Adding Star Ratings Excluding the Top 5% of Weights
 
-# In[332]:
+# In[33]:
 
 
 adjusted_user_artists = user_artists[user_artists['weight']<=2328]
 
 
-# In[333]:
+# In[34]:
 
 
 ## Dropping and recreating the mean, standard deviation and rating columns
@@ -548,7 +531,7 @@ adjusted_user_artists['mean'] = 0
 adjusted_user_artists['std'] = 0
 
 
-# In[335]:
+# In[35]:
 
 
 ## Finding the new means and standard deviations
@@ -563,7 +546,7 @@ for userID in adjusted_user_artists.userID.unique():
     stds[userID] = user_std
 
 
-# In[336]:
+# In[36]:
 
 
 ## Recalculate the means, standard deviations and ratings
@@ -572,7 +555,7 @@ adjusted_user_artists['std'] = adjusted_user_artists.apply(lambda row: find_std(
 adjusted_user_artists['rating'] = adjusted_user_artists.apply(lambda row: find_rating(row), axis=1)
 
 
-# In[338]:
+# In[37]:
 
 
 plt.hist(adjusted_user_artists['rating']);
@@ -582,7 +565,7 @@ plt.hist(adjusted_user_artists['rating']);
 
 # ## Investigating Proportion of Weights below Mean
 
-# In[339]:
+# In[38]:
 
 
 ## Finding the new means and standard deviations
@@ -597,7 +580,7 @@ for userID in user_artists.userID.unique():
     stds[userID] = user_std
 
 
-# In[340]:
+# In[39]:
 
 
 below_mean = {}
@@ -614,7 +597,7 @@ for userID in adjusted_user_artists.userID.unique():
     below_mean[userID] = below_means_count/total
 
 
-# In[367]:
+# In[40]:
 
 
 plt.hist(below_mean.values())
@@ -637,7 +620,7 @@ plt.gca().set(title='Distribution of Weights below Mean');
 # 
 # The weights will not be distributed evenly, the percentages will be calculated as minimum + ((mean - min) * 0.25) for the 1-star ratings, for example.
 
-# In[343]:
+# In[41]:
 
 
 user_artists.drop('std', axis=1, inplace=True)
@@ -647,7 +630,7 @@ user_artists['max'] = 0
 user_artists['rating'] = 0
 
 
-# In[347]:
+# In[42]:
 
 
 ## Creating a dictionary to discover each users mean and standard deviation
@@ -664,7 +647,7 @@ for userID in user_artists.userID.unique():
     maxs[userID] = user_max    
 
 
-# In[348]:
+# In[43]:
 
 
 def find_mean(row, dict):
@@ -677,7 +660,7 @@ def find_max(row, dict):
     return dict[row['userID']]
 
 
-# In[349]:
+# In[44]:
 
 
 user_artists['mean'] = user_artists.apply(lambda row: find_mean(row, means), axis=1)
@@ -685,7 +668,7 @@ user_artists['min'] = user_artists.apply(lambda row: find_min(row, mins), axis=1
 user_artists['max'] = user_artists.apply(lambda row: find_max(row, maxs), axis=1)
 
 
-# In[350]:
+# In[45]:
 
 
 def find_rating(row):
@@ -708,13 +691,13 @@ def find_rating(row):
         return 5
 
 
-# In[351]:
+# In[46]:
 
 
 user_artists['rating'] = user_artists.apply(lambda row: find_rating(row), axis=1)
 
 
-# In[369]:
+# In[47]:
 
 
 plt.hist(user_artists['rating'])
@@ -725,14 +708,14 @@ plt.gca().set(title='Distribution of Star Ratings');
 
 # We need to use these ratings for our recommender system, so we will remove unnecessary columns from the dataframe and export it as a CSV file into our data directory.
 
-# In[354]:
+# In[48]:
 
 
 user_artists.drop(['mean', 'min', 'max'], axis = 1, inplace = True)
 
 
-# In[357]:
+# In[49]:
 
 
-user_artists.to_csv('data/user_artists_ratings.csv')
+user_artists.to_csv('../data/user_artists_ratings.csv')
 
