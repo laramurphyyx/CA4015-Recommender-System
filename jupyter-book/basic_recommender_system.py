@@ -27,11 +27,8 @@ def Find_The_Most_Popular_Music(method="most_users", percentage_of_artists=90, p
 def Find_The_Most_Popular_Music_By_Star_Rating():
 
     ## Importing the Necessary Datasets
-    artists = pd.read_table('../data/artists.dat', sep="\t")
+    artists = pd.read_csv('../data/artists.csv')
     user_artists_ratings = pd.read_csv('../data/user_artists_ratings.csv')
-    
-    ## Removing duplicate ID column
-    user_artists_ratings.drop('Unnamed: 0', axis=1, inplace=True)
     
     ## Discovering the top 2 recommendations
     artists_highest_ratings = user_artists_ratings.sort_values(by='rating', ascending=False)
@@ -52,12 +49,10 @@ def Find_The_Most_Popular_Music_By_Star_Rating():
 
 
 def Find_The_Most_Popular_Music_By_Most_Users():
-    ## Importing the Necessary Datasets
-    artists = pd.read_table('../data/artists.dat', sep="\t")
-    user_artists_ratings = pd.read_csv('../data/user_artists_ratings.csv')
     
-    ## Removing duplicate ID column
-    user_artists_ratings.drop('Unnamed: 0', axis=1, inplace=True)
+    ## Importing the Necessary Datasets
+    artists = pd.read_csv('../data/artists.csv')
+    user_artists_ratings = pd.read_csv('../data/user_artists_ratings.csv')
     
     ## Assigning a new dataframe to include number of users, average rating and number of listens
     artists_user_count = (
@@ -87,12 +82,10 @@ def Find_The_Most_Popular_Music_By_Most_Users():
 
 
 def Find_The_Most_Popular_Music_By_Most_Listens():
-    ## Importing the Necessary Datasets
-    artists = pd.read_table('../data/artists.dat', sep="\t")
-    user_artists_ratings = pd.read_csv('../data/user_artists_ratings.csv')
     
-    ## Removing duplicate ID column
-    user_artists_ratings.drop('Unnamed: 0', axis=1, inplace=True)
+    ## Importing the Necessary Datasets
+    artists = pd.read_csv('../data/artists.csv')
+    user_artists_ratings = pd.read_csv('../data/user_artists_ratings.csv')
     
     ## Assigning a new dataframe to include number of users, average rating and number of listens
     artists_listen_count = (
@@ -124,11 +117,8 @@ def Find_The_Most_Popular_Music_By_Most_Listens():
 def Find_The_Most_Popular_Music_By_Star_rating(percentage=10):
     
     ## Importing the Necessary Datasets
-    artists = pd.read_table('../data/artists.dat', sep="\t")
+    artists = pd.read_csv('../data/artists.csv')
     user_artists_ratings = pd.read_csv('../data/user_artists_ratings.csv')
-    
-    ## Removing duplicate ID column
-    user_artists_ratings.drop('Unnamed: 0', axis=1, inplace=True)
     
     ## Assigning a new dataframe to include number of users, average rating and number of listens
     artists_total_listens = (
@@ -167,11 +157,8 @@ def Find_The_Most_Popular_Music_By_Star_rating(percentage=10):
 def Find_The_Most_Popular_Music_Custom(percentage_of_artists, percentage_basis, recommendation_basis):
     
     ## Importing the Necessary Datasets
-    artists = pd.read_table('../data/artists.dat', sep="\t")
+    artists = pd.read_csv('../data/artists.csv')
     user_artists_ratings = pd.read_csv('../data/user_artists_ratings.csv')
-    
-    ## Removing duplicate ID column
-    user_artists_ratings.drop('Unnamed: 0', axis=1, inplace=True)
     
     ## Assigning a new dataframe to include number of users, average rating and number of listens
     artists_total_listens = (
