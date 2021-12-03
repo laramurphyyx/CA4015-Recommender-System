@@ -29,7 +29,7 @@ The deliverable for this assignment is the complete jupyter book.
 
 The link to the interactive jupyter book is [here](https://laramurphyyx.github.io/CA4015-Recommender-System/Introduction.html).
 
-Otherwise the book can be accessed in the form of a PDF [here]().
+Otherwise the book can be accessed in the form of a PDF [here](https://github.com/laramurphyyx/CA4015-Recommender-System/blob/main/jupyter-book/_build/pdf/book.pdf).
 
 The github repository can be accessed through [this link](https://github.com/laramurphyyx/CA4015-Recommender-System).
 
