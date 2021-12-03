@@ -2,11 +2,12 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: Introduction
+root: Page 1 - Introduction
 chapters:
-- file: Data Exploration
-- file: Adjusting User-Artist Weights
-- file: Assigning tags to artists
-- file: Basic Top Artists Recommender Workings
-- file: Using the Recommender System
-- file: Colab part 2
+- file: Page 2 - Data Exploration
+- file: Page 3 - Adjusting User-Artist Weights
+- file: Page 4 - Assigning Tags to Artists
+- file: Page 5 - Basic Recommender
+- file: Page 6 - Content-Based Recommender
+- file: Page 7 - Collaborative Filtering Recommender
+- file: Page 8 - Using the Recommender System
