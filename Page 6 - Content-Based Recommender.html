@@ -1,0 +1,977 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content-Based Recommender System &#8212; CA4015 - Assignment 3 &amp; 4</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Collaborative Filtering Recommender System" href="Page%207%20-%20Collaborative%20Filtering%20Recommender.html" />
+    <link rel="prev" title="Basic Recommender System" href="Page%205%20-%20Basic%20Recommender.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CA4015 - Assignment 3 & 4</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%201%20-%20Introduction.html">
+   Background
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%202%20-%20Data%20Exploration.html">
+   Data Exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%203%20-%20Adjusting%20User-Artist%20Weights.html">
+   Adjusting User-Artist Weights
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%204%20-%20Assigning%20Tags%20to%20Artists.html">
+   Assigning Tags to Artists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%205%20-%20Basic%20Recommender.html">
+   Basic Recommender System
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Content-Based Recommender System
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%207%20-%20Collaborative%20Filtering%20Recommender.html">
+   Collaborative Filtering Recommender System
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Page 6 - Content-Based Recommender.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/laramurphyyx/CA4015-Recommender-System/tree/main/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/laramurphyyx/CA4015-Recommender-System/tree/main/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPage 6 - Content-Based Recommender.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/laramurphyyx/CA4015-Recommender-System/master?urlpath=tree/docs/Page 6 - Content-Based Recommender.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Content-Based Recommender System
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#importing-relevant-packages-and-datasets">
+     Importing Relevant Packages and Datasets
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adjusting-existing-columns">
+     Adjusting Existing Columns
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recommender-based-on-top-tag">
+     Recommender Based on Top Tag
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-top-5-instead-of-top-1-tags">
+   Using the Top-5 Instead of Top-1 Tags
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="content-based-recommender-system">
+<h1>Content-Based Recommender System<a class="headerlink" href="#content-based-recommender-system" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="importing-relevant-packages-and-datasets">
+<h2>Importing Relevant Packages and Datasets<a class="headerlink" href="#importing-relevant-packages-and-datasets" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">linear_kernel</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataframe_names</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;user_friends&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;user_taggedartists&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;artists&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;tags&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;user_artists&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;user_artists_ratings&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;artists_tags&#39;</span><span class="p">]</span>
+
+<span class="n">file_names</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;../data/user_friends.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/user_taggedartists.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/artists.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/tags.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/user_artists.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/user_artists_ratings.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/artists_tags.csv&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">dataframe_names</span><span class="p">,</span> <span class="n">file_names</span><span class="p">):</span>
+    <span class="nb">vars</span><span class="p">()[</span><span class="n">dataframe</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="adjusting-existing-columns">
+<h2>Adjusting Existing Columns<a class="headerlink" href="#adjusting-existing-columns" title="Permalink to this headline">¶</a></h2>
+<p>Importing artists that have their top two tags and converting them to their string equivalents</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tag_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">tag_dict</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">tags</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+    <span class="n">tagID</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">tag</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">tag_dict</span><span class="p">[</span><span class="n">tagID</span><span class="p">]</span> <span class="o">=</span> <span class="n">tag</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;first_tag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">artists_tags</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">tag_dict</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;first_tag&#39;</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;second_tag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">artists_tags</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">tag_dict</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;second_tag&#39;</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artists_tags</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>url</th>
+      <th>pictureURL</th>
+      <th>first_tag</th>
+      <th>second_tag</th>
+      <th>top_five_tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>MALICE MIZER</td>
+      <td>http://www.last.fm/music/MALICE+MIZER</td>
+      <td>http://userserve-ak.last.fm/serve/252/10808.jpg</td>
+      <td>j-rock</td>
+      <td>visual kei</td>
+      <td>j-rock visual kei gothic japanese weeabo</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Diary of Dreams</td>
+      <td>http://www.last.fm/music/Diary+of+Dreams</td>
+      <td>http://userserve-ak.last.fm/serve/252/3052066.jpg</td>
+      <td>darkwave</td>
+      <td>german</td>
+      <td>darkwave german gothic seen live industrial</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>Carpathian Forest</td>
+      <td>http://www.last.fm/music/Carpathian+Forest</td>
+      <td>http://userserve-ak.last.fm/serve/252/40222717...</td>
+      <td>black metal</td>
+      <td>true norwegian black metal</td>
+      <td>black metal true norwegian black metal norwegi...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Moi dix Mois</td>
+      <td>http://www.last.fm/music/Moi+dix+Mois</td>
+      <td>http://userserve-ak.last.fm/serve/252/54697835...</td>
+      <td>j-rock</td>
+      <td>japanese</td>
+      <td>j-rock japanese visual kei gothic metal</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>Bella Morte</td>
+      <td>http://www.last.fm/music/Bella+Morte</td>
+      <td>http://userserve-ak.last.fm/serve/252/14789013...</td>
+      <td>darkwave</td>
+      <td>gothic</td>
+      <td>darkwave gothic gothic rock deathrock covers</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>17627</th>
+      <td>17627</td>
+      <td>Diamanda Galás</td>
+      <td>http://www.last.fm/music/Diamanda+Gal%C3%A1s</td>
+      <td>http://userserve-ak.last.fm/serve/252/16352971...</td>
+      <td>experimental</td>
+      <td>dead music</td>
+      <td>experimental dead music</td>
+    </tr>
+    <tr>
+      <th>17628</th>
+      <td>17628</td>
+      <td>Aya RL</td>
+      <td>http://www.last.fm/music/Aya+RL</td>
+      <td>http://userserve-ak.last.fm/serve/252/207445.jpg</td>
+      <td></td>
+      <td></td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>17629</th>
+      <td>17629</td>
+      <td>Coptic Rain</td>
+      <td>http://www.last.fm/music/Coptic+Rain</td>
+      <td>http://userserve-ak.last.fm/serve/252/344868.jpg</td>
+      <td></td>
+      <td></td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>17630</th>
+      <td>17630</td>
+      <td>Oz Alchemist</td>
+      <td>http://www.last.fm/music/Oz+Alchemist</td>
+      <td>http://userserve-ak.last.fm/serve/252/29297695...</td>
+      <td>chillout</td>
+      <td>ambient</td>
+      <td>chillout ambient downtempo avant-garde trip hop</td>
+    </tr>
+    <tr>
+      <th>17631</th>
+      <td>17631</td>
+      <td>Grzegorz Tomczak</td>
+      <td>http://www.last.fm/music/Grzegorz+Tomczak</td>
+      <td>http://userserve-ak.last.fm/serve/252/59486303...</td>
+      <td></td>
+      <td></td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>17632 rows × 7 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="recommender-based-on-top-tag">
+<h2>Recommender Based on Top Tag<a class="headerlink" href="#recommender-based-on-top-tag" title="Permalink to this headline">¶</a></h2>
+<p>We aim to calculate the Term Frequency-Inverse Document Frequency (TF-IDF) for each artist. The terms will be taken from the assigned tags for each artist.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;first_tag&#39;</span><span class="p">])</span>
+<span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(17632, 1246)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This ‘tfidf’ object was created to remove any stop words that may appear in the user-assigned tags for each artist.</p>
+<p>This was then fitted as a matrix with the dimensions (N x M) where N is the number of artists and M is the number of tokens/words (excluding stop words) that appear in their top tag. In this case, there are 17,632 artists and 1,246 words.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()[</span><span class="mi">900</span><span class="p">:</span><span class="mi">910</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;play&#39;,
+ &#39;pleasure&#39;,
+ &#39;pleasuredome&#39;,
+ &#39;pleasures&#39;,
+ &#39;podcast&#39;,
+ &#39;poetry&#39;,
+ &#39;polecane&#39;,
+ &#39;polish&#39;,
+ &#39;political&#39;,
+ &#39;pop&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is an example of some of the tokens that appear in the top five tags of each artist.</p>
+<p>There are some tags that wouldn’t be classified as genres, such as ‘pleasures’ or ‘play’, although these are unlikely to affect the performance of the recommender system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cosine_sim</span> <span class="o">=</span> <span class="n">linear_kernel</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">,</span> <span class="n">tfidf_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">MemoryError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_35544</span><span class="o">/</span><span class="mf">2808778117.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">cosine_sim</span> <span class="o">=</span> <span class="n">linear_kernel</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">,</span> <span class="n">tfidf_matrix</span><span class="p">)</span>
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\sklearn\metrics\pairwise.py</span> in <span class="ni">linear_kernel</span><span class="nt">(X, Y, dense_output)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1003</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1004</span><span class="s2">     X, Y = check_pairwise_arrays(X, Y)</span>
+<span class="ne">-&gt; </span><span class="mi">1005</span><span class="s2">     return safe_sparse_dot(X, Y.T, dense_output=dense_output)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1006</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1007</span><span class="s2"> </span>
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\sklearn\utils\validation.py</span> in <span class="ni">inner_f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span><span class="s2">             extra_args = len(args) - len(all_args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span><span class="s2">             if extra_args &lt;= 0:</span>
+<span class="ne">---&gt; </span><span class="mi">63</span><span class="s2">                 return f(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span><span class="s2">             # extra_args &gt; 0</span>
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\sklearn\utils\extmath.py</span> in <span class="ni">safe_sparse_dot</span><span class="nt">(a, b, dense_output)</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span><span class="s2">     if (sparse.issparse(a) and sparse.issparse(b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span><span class="s2">             and dense_output and hasattr(ret, &quot;toarray&quot;)):</span>
+<span class="ne">--&gt; </span><span class="mi">156</span><span class="s2">         return ret.toarray()</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span><span class="s2">     return ret</span>
+<span class="g g-Whitespace">    </span><span class="mi">158</span><span class="s2"> </span>
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\scipy\sparse\compressed.py</span> in <span class="ni">toarray</span><span class="nt">(self, order, out)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1029</span><span class="s2">         if out is None and order is None:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1030</span><span class="s2">             order = self._swap(&#39;cf&#39;)[0]</span>
+<span class="ne">-&gt; </span><span class="mi">1031</span><span class="s2">         out = self._process_toarray_args(order, out)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1032</span><span class="s2">         if not (out.flags.c_contiguous or out.flags.f_contiguous):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1033</span><span class="s2">             raise ValueError(&#39;Output array must be C or F contiguous&#39;)</span>
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\scipy\sparse\base.py</span> in <span class="ni">_process_toarray_args</span><span class="nt">(self, order, out)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1200</span><span class="s2">             return out</span>
+<span class="g g-Whitespace">   </span><span class="mi">1201</span><span class="s2">         else:</span>
+<span class="ne">-&gt; </span><span class="mi">1202</span><span class="s2">             return np.zeros(self.shape, dtype=self.dtype, order=order)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1203</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1204</span><span class="s2"> </span>
+
+<span class="ne">MemoryError</span>: Unable to allocate 2.32 GiB for an array with shape (17632, 17632) and data type float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we are using the TF-IDF Vectoriser, we can calculate the dot product between each vector to give us the cosine similarity score. This is more efficient than to use cosine_similarities().</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cosine_sim</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(17632, 17632)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This makes sense as this similarity is comparing each artist to each other, so each artist has it’s own column and it’s own row.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cosine_sim</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0., 1., ..., 0., 0., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is an example of the cosine similarities for the artist with the ID 2.</p>
+<p>The artist will have 100% similarity with itself, hence there is 1.0 in the 2nd column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">artists_tags</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above ‘indices’ series is created to reverse the mapping of artist names and IDs, this allows for easier searching in the recommender system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_recommendations</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cosine_sim</span><span class="o">=</span><span class="n">cosine_sim</span><span class="p">):</span>
+    <span class="c1"># Get the index of the artist that matches the name</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+    <span class="c1"># Get the pairwsie similarity scores of all artists with that artist</span>
+    <span class="n">sim_scores</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">cosine_sim</span><span class="p">[</span><span class="n">index</span><span class="p">]))</span>
+
+    <span class="c1"># Sort the artists based on the similarity scores</span>
+    <span class="n">sim_scores</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">sim_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Get the scores of the 10 most similar artists</span>
+    <span class="n">sim_scores</span> <span class="o">=</span> <span class="n">sim_scores</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>
+
+    <span class="c1"># Get the artist indices</span>
+    <span class="n">artist_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sim_scores</span><span class="p">]</span>
+
+    <span class="c1"># Return the top 10 most similar movies</span>
+    <span class="k">return</span> <span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">artist_indices</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above function retrieves the top 10 recommendations based on the most common tag that each artist received.</p>
+<p>This will work quite well for artists that have received lots of the same tag, making it more accurate, and may not perform as well on artists with few/no tags.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_recommendations</span><span class="p">(</span><span class="s1">&#39;Kanye West&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>238     Flagelo Urbano
+243             Common
+249               Nach
+253         9th Wonder
+261                Nas
+265            Mos Def
+272               2Pac
+300    Black Eyed Peas
+325         Kanye West
+454           Noize MC
+Name: name, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artists_tags</span><span class="p">[</span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Flagelo Urbano&#39;</span><span class="p">]</span> <span class="c1">## hip hop under, raptuga, underground hip hp, hip hop</span>
+<span class="n">artists_tags</span><span class="p">[</span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Common&#39;</span><span class="p">]</span> <span class="c1">## hip-hop, hip hop, rap, mean, 90s</span>
+<span class="n">artists_tags</span><span class="p">[</span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Nach&#39;</span><span class="p">]</span> <span class="c1">## hip-hop</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>url</th>
+      <th>pictureURL</th>
+      <th>first_tag</th>
+      <th>second_tag</th>
+      <th>top_five_tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>249</th>
+      <td>249</td>
+      <td>Nach</td>
+      <td>http://www.last.fm/music/Nach</td>
+      <td>http://userserve-ak.last.fm/serve/252/2510461.jpg</td>
+      <td>hip-hop</td>
+      <td></td>
+      <td>hip-hop</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_recommendations</span><span class="p">(</span><span class="s1">&#39;Coptic Rain&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1       Diary of Dreams
+2     Carpathian Forest
+3          Moi dix Mois
+4           Bella Morte
+5             Moonspell
+6        Marilyn Manson
+7           DIR EN GREY
+8           Combichrist
+9               Grendel
+10             Agonoize
+Name: name, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artists_tags</span><span class="p">[</span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Diary of Dreams&#39;</span><span class="p">]</span> <span class="c1">## darkwave, german, gothic, seen live, industrial</span>
+<span class="n">artists_tags</span><span class="p">[</span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Carpathian Forest&#39;</span><span class="p">]</span> <span class="c1">## black metal, true norwegian black metal, norwegian</span>
+<span class="n">artists_tags</span><span class="p">[</span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Moi dix Mois&#39;</span><span class="p">]</span> <span class="c1">## j-rock, japanese, visual kei, gothic metal</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>url</th>
+      <th>pictureURL</th>
+      <th>first_tag</th>
+      <th>second_tag</th>
+      <th>top_five_tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>Bella Morte</td>
+      <td>http://www.last.fm/music/Bella+Morte</td>
+      <td>http://userserve-ak.last.fm/serve/252/14789013...</td>
+      <td>darkwave</td>
+      <td>gothic</td>
+      <td>darkwave gothic gothic rock deathrock covers</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As you can see when we run ‘Kanye West’ into the recommender system, we are given lots of artist that are related to hip-hop or rap. Although, the third recommendation, Nach, only has one tag assigned to it, which suggests that Nach received very few tags, and may not be similar to Kanye West.</p>
+<p>With our second example, we ran ‘Coptic Rain’ into the recommender system, to see how it would perform on an artist that had no tags. The tags of the top three recommended artists seem to be quite random (darkwave, german, norwegian, japanese). The system performed quite poorly for this artist.</p>
+</div>
+</div>
+<div class="section" id="using-the-top-5-instead-of-top-1-tags">
+<h1>Using the Top-5 Instead of Top-1 Tags<a class="headerlink" href="#using-the-top-5-instead-of-top-1-tags" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;top_five_tags&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;top_five_tags&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_name_and_tags</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;top_five_tags&#39;</span><span class="p">]</span>
+
+<span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name_and_tags&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">artists_tags</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">find_name_and_tags</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The name of the artist may be important to use in the recommender system as it may be referenced within some of the tags.</p>
+<p>Some of the tags produced by the users may contain comments such as “sounds like michael jackson”, and in this case it can create relations between Michael Jackson and these comments. It can also build relationships where the artist name may appear as “Jay-Z ft. Kanye West”, so that Jay-Z and Kanye West could achieve a larger cosine similarity.</p>
+<p>We are merging the name and the tags into one column to simplify things.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">count_matrix</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name_and_tags&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, we use CountVectorizer() instead of TF-IDF, as previously done. This is just to avoid down-weighting important tags that may appear more often than others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_matrix</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(17632, 20107)
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are much more words being produced when we accept the top 5 tags and the name of the artists.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cosine_sim2</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">count_matrix</span><span class="p">,</span> <span class="n">count_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">artists_tags</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">artists_tags</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we are creating the new cosine similarity matrix and the new indices object that can be passed into our original get_recommendations() function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_recommendations</span><span class="p">(</span><span class="s1">&#39;Kanye West&#39;</span><span class="p">,</span> <span class="n">cosine_sim2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2578     will.i.am
+16355        Trina
+898      Timbaland
+1435          Akon
+3280         Drake
+6425         Diddy
+7596        Chingy
+7968        T-Pain
+7991        Fugees
+11483         Iyaz
+Name: name, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_recommendations</span><span class="p">(</span><span class="s1">&#39;Coptic Rain&#39;</span><span class="p">,</span> <span class="n">cosine_sim2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15869        City Rain
+7461              Rain
+9187     The Mavericks
+12739      Room Eleven
+1469       B.J. Thomas
+12457       Black Rain
+954              Yanni
+2053            Yiruma
+3537        Gary Allan
+3559       Clint Black
+Name: name, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>When we run ‘Kanye West’ in the new recommender system, it seems to output more accurate results, the top 10 similar artists seem to be more similar this time.</p>
+<p>However, when we run ‘Coptic Rain’, who has no tags, we get other artists with very similar names, as it is the only token being considered.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Page%205%20-%20Basic%20Recommender.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Basic Recommender System</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="Page%207%20-%20Collaborative%20Filtering%20Recommender.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Collaborative Filtering Recommender System</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Lara Murphy<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
