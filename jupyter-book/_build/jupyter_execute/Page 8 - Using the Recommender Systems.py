@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # Using the Recommender Systems
+
 # In[1]:
 
 
@@ -10,6 +12,8 @@ import matplotlib.pyplot as plt
 from basic_recommender_system import *
 from content_based_recommender import *
 
+
+# These recommender systems can be used if you create a local version of this repo and change some of the variables in this noetbook.
 
 # # Guideline to use the Basic Recommender System
 

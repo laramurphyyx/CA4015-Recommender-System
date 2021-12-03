@@ -8,18 +8,12 @@
 # In[1]:
 
 
-import os
 import matplotlib.pyplot as plt
-import seaborn as sns
-from __future__ import print_function
 import numpy as np
 import pandas as pd
 import collections
-from mpl_toolkits.mplot3d import Axes3D
 from IPython import display
 from matplotlib import pyplot as plt
-import sklearn
-import sklearn.manifold
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 tf.logging.set_verbosity(tf.logging.ERROR)
@@ -27,19 +21,9 @@ tf.logging.set_verbosity(tf.logging.ERROR)
 # Add some convenience functions to Pandas DataFrame.
 pd.options.display.max_rows = 10
 pd.options.display.float_format = '{:.3f}'.format
-def mask(df, key, function):
-  """Returns a filtered dataframe, by applying function to key"""
-  return df[function(df[key])]
-
-def flatten_cols(df):
-  df.columns = [' '.join(col).strip() for col in df.columns.values]
-  return df
-
-pd.DataFrame.mask = mask
-pd.DataFrame.flatten_cols = flatten_cols
 
 
-# In[50]:
+# In[2]:
 
 
 user_artists = pd.read_csv('../data/user_artists_ratings.csv')
@@ -52,7 +36,7 @@ artists_tags = pd.read_csv('../data/artists_tags.csv')
 
 # ## Creating Functions to Build Sparse Tensor and Calculate MSE
 
-# In[22]:
+# In[3]:
 
 
 def build_rating_sparse_tensor(user_artists_df):
@@ -81,7 +65,7 @@ def sparse_mean_square_error(sparse_ratings, user_embeddings, music_embeddings):
 
 # ## Creating Functions to Build a Collaborative-Filtering Model
 
-# In[34]:
+# In[5]:
 
 
 class CFModel(object):
@@ -167,7 +151,7 @@ class CFModel(object):
             return results
 
 
-# In[25]:
+# In[6]:
 
 
 def build_model(ratings, embedding_dim=3, init_stddev=1.):
@@ -175,8 +159,8 @@ def build_model(ratings, embedding_dim=3, init_stddev=1.):
     # Split the ratings DataFrame into train and test
     train_ratings, test_ratings = split_dataframe(ratings)
     # SparseTensor representation of the train and test datasets.
-    A_train = build_rating_sparse_tensor_ratings(train_ratings)
-    A_test = build_rating_sparse_tensor_ratings(test_ratings)
+    A_train = build_rating_sparse_tensor(train_ratings)
+    A_test = build_rating_sparse_tensor(test_ratings)
     # Initialize the embeddings using a normal distribution.
     U = tf.Variable(tf.random_normal(
         [A_train.dense_shape[0], embedding_dim], stddev=init_stddev))
@@ -195,7 +179,7 @@ def build_model(ratings, embedding_dim=3, init_stddev=1.):
     return CFModel(embeddings, train_loss, [metrics])
 
 
-# In[26]:
+# In[7]:
 
 
 def split_dataframe(df, holdout_fraction=0.1):
@@ -207,21 +191,21 @@ def split_dataframe(df, holdout_fraction=0.1):
 
 # ## Building and Training the Model
 
-# In[40]:
+# In[8]:
 
 
 model = build_model(user_artists, embedding_dim=30, init_stddev=0.5)
 model.train(num_iterations=2000, learning_rate=10.)
 
 
-# In[42]:
+# In[9]:
 
 
 model = build_model(user_artists, embedding_dim=30, init_stddev=0.5)
 model.train(num_iterations=2000, learning_rate=.5)
 
 
-# In[43]:
+# In[10]:
 
 
 model = build_model(user_artists, embedding_dim=10, init_stddev=0.5)
@@ -230,7 +214,7 @@ model.train(num_iterations=2000, learning_rate=10)
 
 # # Inspect Embeddings
 
-# In[10]:
+# In[11]:
 
 
 DOT = 'dot'
@@ -246,7 +230,7 @@ def compute_scores(query_embedding, item_embeddings, measure=DOT):
     return scores
 
 
-# In[11]:
+# In[12]:
 
 
 def artist_neighbors(model, title_substring, measure=DOT, k=6):
@@ -270,19 +254,19 @@ def artist_neighbors(model, title_substring, measure=DOT, k=6):
     display.display(df.sort_values([score_key], ascending=False).head(k))
 
 
-# In[18]:
+# In[13]:
 
 
 artist_neighbors(model, "Kanye", DOT)
 
 
-# In[32]:
+# In[14]:
 
 
 artist_neighbors(model, "Kanye", COSINE)
 
 
-# In[33]:
+# In[15]:
 
 
 model_lowinit = build_model(user_artists, embedding_dim=30, init_stddev=0.05)
@@ -291,7 +275,7 @@ artist_neighbors(model_lowinit, "Kanye", DOT)
 artist_neighbors(model_lowinit, "Kanye", COSINE)
 
 
-# In[44]:
+# In[16]:
 
 
 def gravity(U, V):
@@ -335,7 +319,7 @@ def build_regularized_model(
     return CFModel(embeddings, total_loss, [losses, loss_components]), U, V
 
 
-# In[45]:
+# In[17]:
 
 
 reg_model, u, v = build_regularized_model(
@@ -344,15 +328,9 @@ reg_model, u, v = build_regularized_model(
 reg_model.train(num_iterations=2000, learning_rate=20.)
 
 
-# In[46]:
+# In[19]:
 
 
 artist_neighbors(reg_model, "Kanye", DOT)
 artist_neighbors(reg_model, "Kanye", COSINE)
-
-
-# In[ ]:
-
-
-
 

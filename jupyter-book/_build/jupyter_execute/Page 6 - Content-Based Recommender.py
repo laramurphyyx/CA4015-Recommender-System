@@ -68,17 +68,11 @@ artists_tags['first_tag'] = artists_tags.apply(lambda row: tag_dict[row['first_t
 artists_tags['second_tag'] = artists_tags.apply(lambda row: tag_dict[row['second_tag']], axis=1)
 
 
-# In[6]:
-
-
-artists_tags
-
-
 # ## Recommender Based on Top Tag
 
 # We aim to calculate the Term Frequency-Inverse Document Frequency (TF-IDF) for each artist. The terms will be taken from the assigned tags for each artist.
 
-# In[7]:
+# In[6]:
 
 
 tfidf = TfidfVectorizer(stop_words='english')
@@ -90,7 +84,7 @@ tfidf_matrix.shape
 # 
 # This was then fitted as a matrix with the dimensions (N x M) where N is the number of artists and M is the number of tokens/words (excluding stop words) that appear in their top tag. In this case, there are 17,632 artists and 1,246 words.
 
-# In[8]:
+# In[7]:
 
 
 tfidf.get_feature_names()[900:910]
@@ -100,7 +94,7 @@ tfidf.get_feature_names()[900:910]
 # 
 # There are some tags that wouldn't be classified as genres, such as 'pleasures' or 'play', although these are unlikely to affect the performance of the recommender system.
 
-# In[9]:
+# In[8]:
 
 
 cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)

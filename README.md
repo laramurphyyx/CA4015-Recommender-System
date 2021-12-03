@@ -27,5 +27,18 @@ In addition to that tutotial, I have also implemented:
 
 The deliverable for this assignment is the complete jupyter book.
 
-The link to the interactive jupyter book is [here](https://laramurphyyx.github.io/CA4015-Recommender-System/Introduction.html)
+The link to the interactive jupyter book is [here](https://laramurphyyx.github.io/CA4015-Recommender-System/Introduction.html).
 
+Otherwise the book can be accessed in the form of a PDF [here]().
+
+The github repository can be accessed through [this link](https://github.com/laramurphyyx/CA4015-Recommender-System).
+
+## Encountered Bugs/Errors
+
+The following errors should be noted when reading the jupyter book:
+
+1. There is a bug where the last page disappears from the page navigation panel on the left of the jupyter book. The last page 'Using the Recommender Systems' appears when you have the 'Background' page open, although will disappear once you access another page.
+
+3. There is a keyboard interrupt error that occasionally occurs when running the 'Content-Based Recommender System' or the 'Collaborative Filtering Recommender System', possibly due to a timeout. This can be seen in the PDF but does not occur in the notebook in the repository.
+
+4. There is a memory issue when trying to run the content-based recommender system from a function, in 'Using the Recommender Systems'. This may work if ran locally on a different machine, but examples are given in the preceding notebook 'Content-Based Recommender'.

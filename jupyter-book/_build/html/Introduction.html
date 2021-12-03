@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background &#8212; CA4015 - Assignment 3 &amp; 4</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CA4015 - Assignment 3 & 4</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%201%20-%20Introduction.html">
+   Background
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%202%20-%20Data%20Exploration.html">
+   Data Exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%203%20-%20Adjusting%20User-Artist%20Weights.html">
+   Adjusting User-Artist Weights
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%204%20-%20Assigning%20Tags%20to%20Artists.html">
+   Assigning Tags to Artists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%205%20-%20Basic%20Recommender.html">
+   Basic Recommender System
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%206%20-%20Content-Based%20Recommender.html">
+   Content-Based Recommender System
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%207%20-%20Collaborative%20Filtering%20Recommender.html">
+   Collaborative Filtering Recommender System
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%208%20-%20Using%20the%20Recommender%20Systems.html">
+   Using the Recommender Systems
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Introduction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/laramurphyyx/CA4015-Recommender-System/tree/main/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/laramurphyyx/CA4015-Recommender-System/tree/main/jupyter-book/issues/new?title=Issue%20on%20page%20%2FIntroduction.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-recommender-systems">
+   What are Recommender Systems?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-recommender-systems-work">
+   How do Recommender Systems Work?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-the-data-used-in-our-recommender-system">
+   About the Data used in our Recommender System
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encountered-bugs-errors">
+   Encountered Bugs/Errors
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="background">
+<h1>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-are-recommender-systems">
+<h2>What are Recommender Systems?<a class="headerlink" href="#what-are-recommender-systems" title="Permalink to this headline">¶</a></h2>
+<p>Recommender systems are machine-learning based algorithms that can ‘learn’ what a user might like to see, based on the information it has about the user or the product/item. Recommender systems can be seen in many services that we use regularly, such as Amazon recommending products to us or Facebook recommending people we may know. Some companies rely heavily on the use of these techniques and algorithms, such as Netflix, where their business model and its success are influenced by the accuracy of their recommendations.</p>
+</div>
+<div class="section" id="how-do-recommender-systems-work">
+<h2>How do Recommender Systems Work?<a class="headerlink" href="#how-do-recommender-systems-work" title="Permalink to this headline">¶</a></h2>
+<p>There are several approaches that can be taken to build a recommender system. Some of which are:</p>
+<ul class="simple">
+<li><p><b>Simple Recommenders</b>: These are the easiest to implement. This is a simple recommender system that shows the user what is popular. This is a generalised method of recommending, although the idea behind this system is that things that are more popular and more liked will be more likely to be enjoyed by the average audience.</p></li>
+<li><p><b>Collaborative Filtering</b>: This method is more complex than the above Simple Recommender, as it is more specific to the user. This method ignores information about the target item (song, movie, etc.), and just bases its recommendation purely on user information/opinions. The concept of collaborative filtering is based on the idea that user A has the same likes/dislikes/opinions as user B, that user A is more likely to have the same opinion as user B on a different issue than a randomly chosen user. (<a class="reference external" href="https://www.datacamp.com/community/tutorials/recommender-systems-python">Interesting link about user-based vs. item-based</a>)</p></li>
+<li><p><b>Content-Based Recommenders</b>: This approach uses the item’s metadata, for example the metadata held for a movie would be it’s genre, director, description or actors. This algorithm identifies the genres/directors/actors that a user generally likes, and uses this as a guide for future recommendations.</p></li>
+<li><p><b>Hybrid Approach</b>: This approach is a combination of collaborative filtering and content-based recommenders. This can be quite difficult to implement, although when optimized, can outperform both methods of recommending.</p></li>
+</ul>
+<p>The first three approaches have been represented in this assignment.</p>
+</div>
+<div class="section" id="about-the-data-used-in-our-recommender-system">
+<h2>About the Data used in our Recommender System<a class="headerlink" href="#about-the-data-used-in-our-recommender-system" title="Permalink to this headline">¶</a></h2>
+<p>Our Recommender System is based on artists from the LastFM dataset.
+The LastFM dataset contains information about 92,800 artists and 1,892 users. The data is comprised of 6 files:</p>
+<ul class="simple">
+<li><p>artists.dat : This file contains information about the artist, such as their ID, their name, and URLs associated with them</p></li>
+<li><p>tags.dat : This file contains a mapping for each tag ID and the tag description</p></li>
+<li><p>user_artists.dat : This file contains information about how many times a user has listened to each artist</p></li>
+<li><p>user_friends.dat : This file contains a mapping for a user and each of their friends</p></li>
+<li><p>user_taggedartists.dat : This file contains information about the tags assigned to each artist from each user</p></li>
+<li><p>user_taggedartists_timestamps.dat : This file contains the same content as user_taggedartists.dat, but with the added timestamp</p></li>
+</ul>
+<p>The dataset also includes a readme file to provide context and further explanation on the information contained in each file.</p>
+<p>This dataset is available through <a class="reference external" href="https://grouplens.org/datasets/hetrec-2011/">this link</a>, or you can download it directly by clicking <a class="reference external" href="http://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-2k.zip">here</a>.</p>
+</div>
+<div class="section" id="encountered-bugs-errors">
+<h2>Encountered Bugs/Errors<a class="headerlink" href="#encountered-bugs-errors" title="Permalink to this headline">¶</a></h2>
+<p>The following errors should be noted when reading the jupyter book:</p>
+<ol class="simple">
+<li><p>There is a bug where the last page disappears from the page navigation panel on the left of the jupyter book. The last page ‘Using the Recommender Systems’ appears when you have the ‘Background’ page open, although will disappear once you access another page.</p></li>
+<li><p>There is a keyboard interrupt error that occasionally occurs when running the ‘Content-Based Recommender System’ or the ‘Collaborative Filtering Recommender System’, possibly due to a timeout. This can be seen in the PDF but does not occur in the notebook in the repository.</p></li>
+<li><p>There is a memory issue when trying to run the content-based recommender system from a function, in ‘Using the Recommender Systems’. This may work if ran locally on a different machine, but examples are given in the preceding notebook ‘Content-Based Recommender’.</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Lara Murphy<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

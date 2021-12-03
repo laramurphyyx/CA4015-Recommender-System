@@ -124,6 +124,11 @@
    Collaborative Filtering Recommender System
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%208%20-%20Using%20the%20Recommender%20Systems.html">
+   Using the Recommender Systems
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -338,156 +343,6 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artists_tags</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>name</th>
-      <th>url</th>
-      <th>pictureURL</th>
-      <th>first_tag</th>
-      <th>second_tag</th>
-      <th>top_five_tags</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>MALICE MIZER</td>
-      <td>http://www.last.fm/music/MALICE+MIZER</td>
-      <td>http://userserve-ak.last.fm/serve/252/10808.jpg</td>
-      <td>j-rock</td>
-      <td>visual kei</td>
-      <td>j-rock visual kei gothic japanese weeabo</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>Diary of Dreams</td>
-      <td>http://www.last.fm/music/Diary+of+Dreams</td>
-      <td>http://userserve-ak.last.fm/serve/252/3052066.jpg</td>
-      <td>darkwave</td>
-      <td>german</td>
-      <td>darkwave german gothic seen live industrial</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>Carpathian Forest</td>
-      <td>http://www.last.fm/music/Carpathian+Forest</td>
-      <td>http://userserve-ak.last.fm/serve/252/40222717...</td>
-      <td>black metal</td>
-      <td>true norwegian black metal</td>
-      <td>black metal true norwegian black metal norwegi...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>Moi dix Mois</td>
-      <td>http://www.last.fm/music/Moi+dix+Mois</td>
-      <td>http://userserve-ak.last.fm/serve/252/54697835...</td>
-      <td>j-rock</td>
-      <td>japanese</td>
-      <td>j-rock japanese visual kei gothic metal</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>Bella Morte</td>
-      <td>http://www.last.fm/music/Bella+Morte</td>
-      <td>http://userserve-ak.last.fm/serve/252/14789013...</td>
-      <td>darkwave</td>
-      <td>gothic</td>
-      <td>darkwave gothic gothic rock deathrock covers</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>17627</th>
-      <td>17627</td>
-      <td>Diamanda Galás</td>
-      <td>http://www.last.fm/music/Diamanda+Gal%C3%A1s</td>
-      <td>http://userserve-ak.last.fm/serve/252/16352971...</td>
-      <td>experimental</td>
-      <td>dead music</td>
-      <td>experimental dead music</td>
-    </tr>
-    <tr>
-      <th>17628</th>
-      <td>17628</td>
-      <td>Aya RL</td>
-      <td>http://www.last.fm/music/Aya+RL</td>
-      <td>http://userserve-ak.last.fm/serve/252/207445.jpg</td>
-      <td></td>
-      <td></td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>17629</th>
-      <td>17629</td>
-      <td>Coptic Rain</td>
-      <td>http://www.last.fm/music/Coptic+Rain</td>
-      <td>http://userserve-ak.last.fm/serve/252/344868.jpg</td>
-      <td></td>
-      <td></td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>17630</th>
-      <td>17630</td>
-      <td>Oz Alchemist</td>
-      <td>http://www.last.fm/music/Oz+Alchemist</td>
-      <td>http://userserve-ak.last.fm/serve/252/29297695...</td>
-      <td>chillout</td>
-      <td>ambient</td>
-      <td>chillout ambient downtempo avant-garde trip hop</td>
-    </tr>
-    <tr>
-      <th>17631</th>
-      <td>17631</td>
-      <td>Grzegorz Tomczak</td>
-      <td>http://www.last.fm/music/Grzegorz+Tomczak</td>
-      <td>http://userserve-ak.last.fm/serve/252/59486303...</td>
-      <td></td>
-      <td></td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>17632 rows × 7 columns</p>
-</div></div></div>
-</div>
 </div>
 <div class="section" id="recommender-based-on-top-tag">
 <h2>Recommender Based on Top Tag<a class="headerlink" href="#recommender-based-on-top-tag" title="Permalink to this headline">¶</a></h2>
@@ -540,7 +395,7 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">MemoryError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_24912</span><span class="o">/</span><span class="mf">2808778117.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_30472</span><span class="o">/</span><span class="mf">2808778117.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">cosine_sim</span> <span class="o">=</span> <span class="n">linear_kernel</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">,</span> <span class="n">tfidf_matrix</span><span class="p">)</span>
 
 <span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\sklearn\metrics\pairwise.py</span> in <span class="ni">linear_kernel</span><span class="nt">(X, Y, dense_output)</span>

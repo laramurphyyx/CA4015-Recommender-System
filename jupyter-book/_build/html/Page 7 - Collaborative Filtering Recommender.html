@@ -51,6 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using the Recommender Systems" href="Page%208%20-%20Using%20the%20Recommender%20Systems.html" />
     <link rel="prev" title="Content-Based Recommender System" href="Page%206%20-%20Content-Based%20Recommender.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,6 +122,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Collaborative Filtering Recommender System
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%208%20-%20Using%20the%20Recommender%20Systems.html">
+   Using the Recommender Systems
   </a>
  </li>
 </ul>
@@ -276,18 +282,12 @@
 <h2>Importing Relevant Packages and Datasets<a class="headerlink" href="#importing-relevant-packages-and-datasets" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 <span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">sklearn</span>
-<span class="kn">import</span> <span class="nn">sklearn.manifold</span>
 <span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
 <span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
@@ -295,94 +295,13 @@
 <span class="c1"># Add some convenience functions to Pandas DataFrame.</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="k">def</span> <span class="nf">mask</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Returns a filtered dataframe, by applying function to key&quot;&quot;&quot;</span>
-  <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">function</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">key</span><span class="p">])]</span>
-
-<span class="k">def</span> <span class="nf">flatten_cols</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-  <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
-  <span class="k">return</span> <span class="n">df</span>
-
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">flatten_cols</span> <span class="o">=</span> <span class="n">flatten_cols</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">MemoryError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_42252</span><span class="o">/</span><span class="mf">2519135230.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">import</span> <span class="nn">sklearn</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span> <span class="nn">sklearn.manifold</span>
-<span class="ne">---&gt; </span><span class="mi">13</span> <span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="kn">from</span> <span class="nn">._api.v2</span> <span class="kn">import</span> <span class="n">autograph</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="kn">from</span> <span class="nn">._api.v2</span> <span class="kn">import</span> <span class="n">bitwise</span>
-<span class="ne">---&gt; </span><span class="mi">55</span> <span class="kn">from</span> <span class="nn">._api.v2</span> <span class="kn">import</span> <span class="n">compat</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="kn">from</span> <span class="nn">._api.v2</span> <span class="kn">import</span> <span class="n">config</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="kn">from</span> <span class="nn">._api.v2</span> <span class="kn">import</span> <span class="n">data</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">autograph</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">bitwise</span>
-<span class="ne">---&gt; </span><span class="mi">34</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">compat</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">data</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="n">compat</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="kn">import</span> <span class="nn">sys</span> <span class="k">as</span> <span class="nn">_sys</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span> 
-<span class="ne">---&gt; </span><span class="mi">39</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">v1</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">v2</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span> <span class="kn">from</span> <span class="nn">tensorflow.python.compat.compat</span> <span class="kn">import</span> <span class="n">forward_compatibility_horizon</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v2.compat.v1</span> <span class="kn">import</span> <span class="n">layers</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v2.compat.v1</span> <span class="kn">import</span> <span class="n">linalg</span>
-<span class="ne">---&gt; </span><span class="mi">51</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v2.compat.v1</span> <span class="kn">import</span> <span class="n">lite</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v2.compat.v1</span> <span class="kn">import</span> <span class="n">logging</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v2.compat.v1</span> <span class="kn">import</span> <span class="n">lookup</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="n">lite</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> 
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">experimental</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python.lite</span> <span class="kn">import</span> <span class="n">Interpreter</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python.lite</span> <span class="kn">import</span> <span class="n">OpHint</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="n">lite</span>\<span class="n">experimental</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="n">lite</span>\<span class="n">experimental</span>\<span class="n">authoring</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">import</span> <span class="nn">sys</span> <span class="k">as</span> <span class="nn">_sys</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> 
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python.authoring.authoring</span> <span class="kn">import</span> <span class="n">compatible</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> 
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">del</span> <span class="n">_print_function</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">lite</span>\<span class="n">python</span>\<span class="n">authoring</span>\<span class="n">authoring</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="c1"># pylint: disable=g-import-not-at-top</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python</span> <span class="kn">import</span> <span class="n">convert</span>
-<span class="ne">---&gt; </span><span class="mi">44</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python</span> <span class="kn">import</span> <span class="n">lite</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python.metrics_wrapper</span> <span class="kn">import</span> <span class="n">converter_error_data_pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="kn">from</span> <span class="nn">tensorflow.python.util.tf_export</span> <span class="kn">import</span> <span class="n">tf_export</span> <span class="k">as</span> <span class="n">_tf_export</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">lite</span>\<span class="n">python</span>\<span class="n">lite</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">lite</span>\<span class="n">experimental</span>\<span class="n">microfrontend</span>\<span class="n">python</span>\<span class="n">ops</span>\<span class="n">audio_microfrontend_op</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="kn">from</span> <span class="nn">tensorflow.python.util.tf_export</span> <span class="kn">import</span> <span class="n">tf_export</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> 
-<span class="ne">---&gt; </span><span class="mi">29</span> <span class="n">_audio_microfrontend_op</span> <span class="o">=</span> <span class="n">load_library</span><span class="o">.</span><span class="n">load_op_library</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="n">resource_loader</span><span class="o">.</span><span class="n">get_path_to_datafile</span><span class="p">(</span><span class="s2">&quot;_audio_microfrontend_op.so&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> 
-
-<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\framework\load_library.py</span> in <span class="ni">load_op_library</span><span class="nt">(library_filename)</span>
-
-<span class="ne">MemoryError</span>: bad allocation
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\laram\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\compat\v2_compat.py:111: disable_resource_variables (from tensorflow.python.ops.variable_scope) is deprecated and will be removed in a future version.
+Instructions for updating:
+non-resource variables are not supported in the long term
 </pre></div>
 </div>
 </div>
@@ -528,8 +447,8 @@
     <span class="c1"># Split the ratings DataFrame into train and test</span>
     <span class="n">train_ratings</span><span class="p">,</span> <span class="n">test_ratings</span> <span class="o">=</span> <span class="n">split_dataframe</span><span class="p">(</span><span class="n">ratings</span><span class="p">)</span>
     <span class="c1"># SparseTensor representation of the train and test datasets.</span>
-    <span class="n">A_train</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor_ratings</span><span class="p">(</span><span class="n">train_ratings</span><span class="p">)</span>
-    <span class="n">A_test</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor_ratings</span><span class="p">(</span><span class="n">test_ratings</span><span class="p">)</span>
+    <span class="n">A_train</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor</span><span class="p">(</span><span class="n">train_ratings</span><span class="p">)</span>
+    <span class="n">A_test</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor</span><span class="p">(</span><span class="n">test_ratings</span><span class="p">)</span>
     <span class="c1"># Initialize the embeddings using a normal distribution.</span>
     <span class="n">U</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_normal</span><span class="p">(</span>
         <span class="p">[</span><span class="n">A_train</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">embedding_dim</span><span class="p">],</span> <span class="n">stddev</span><span class="o">=</span><span class="n">init_stddev</span><span class="p">))</span>
@@ -571,6 +490,408 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 0: train_error=7.674745, test_error=7.676869
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 10: train_error=6.973046, test_error=7.464542
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 20: train_error=6.428425, test_error=7.316956
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 30: train_error=5.963654, test_error=7.190217
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 40: train_error=5.533082, test_error=7.055270
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 50: train_error=5.107881, test_error=6.890791
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 60: train_error=4.678211, test_error=6.688717
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 70: train_error=4.255985, test_error=6.460946
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 80: train_error=3.861839, test_error=6.230646
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 90: train_error=3.507273, test_error=6.014506
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 100: train_error=3.193339, test_error=5.818508
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 110: train_error=2.917263, test_error=5.643669
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 120: train_error=2.675326, test_error=5.489468
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 130: train_error=2.463389, test_error=5.354567
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 140: train_error=2.277289, test_error=5.237117
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 150: train_error=2.113181, test_error=5.135093
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 160: train_error=1.967715, test_error=5.046528
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 170: train_error=1.838059, test_error=4.969631
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 180: train_error=1.721860, test_error=4.902824
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 190: train_error=1.617180, test_error=4.844743
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 200: train_error=1.522428, test_error=4.794218
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 210: train_error=1.436290, test_error=4.750252
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 220: train_error=1.357679, test_error=4.711993
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 230: train_error=1.285689, test_error=4.678712
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 240: train_error=1.219560, test_error=4.649786
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 250: train_error=1.158646, test_error=4.624678
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 260: train_error=1.102397, test_error=4.602925
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 270: train_error=1.050340, test_error=4.584130
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 280: train_error=1.002065, test_error=4.567944
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 290: train_error=0.957216, test_error=4.554067
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 300: train_error=0.915479, test_error=4.542235
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 310: train_error=0.876578, test_error=4.532219
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 320: train_error=0.840269, test_error=4.523817
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 330: train_error=0.806334, test_error=4.516850
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 340: train_error=0.774578, test_error=4.511162
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 350: train_error=0.744826, test_error=4.506617
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 360: train_error=0.716921, test_error=4.503088
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 370: train_error=0.690719, test_error=4.500470
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 380: train_error=0.666093, test_error=4.498664
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 390: train_error=0.642924, test_error=4.497585
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 400: train_error=0.621107, test_error=4.497155
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 410: train_error=0.600542, test_error=4.497307
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 420: train_error=0.581141, test_error=4.497978
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 430: train_error=0.562822, test_error=4.499113
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 440: train_error=0.545510, test_error=4.500663
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 450: train_error=0.529134, test_error=4.502584
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 460: train_error=0.513633, test_error=4.504835
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 470: train_error=0.498946, test_error=4.507381
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 480: train_error=0.485019, test_error=4.510190
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 490: train_error=0.471802, test_error=4.513234
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 500: train_error=0.459249, test_error=4.516484
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 510: train_error=0.447317, test_error=4.519921
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 520: train_error=0.435965, test_error=4.523520
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 530: train_error=0.425158, test_error=4.527264
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 540: train_error=0.414859, test_error=4.531136
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 550: train_error=0.405039, test_error=4.535119
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 560: train_error=0.395666, test_error=4.539202
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 570: train_error=0.386714, test_error=4.543370
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 580: train_error=0.378157, test_error=4.547613
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 590: train_error=0.369971, test_error=4.551921
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 600: train_error=0.362134, test_error=4.556286
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 610: train_error=0.354625, test_error=4.560698
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 620: train_error=0.347425, test_error=4.565149
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 630: train_error=0.340517, test_error=4.569636
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 640: train_error=0.333882, test_error=4.574151
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 650: train_error=0.327507, test_error=4.578688
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 660: train_error=0.321376, test_error=4.583243
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 670: train_error=0.315475, test_error=4.587811
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 680: train_error=0.309793, test_error=4.592391
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 690: train_error=0.304316, test_error=4.596976
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 700: train_error=0.299035, test_error=4.601566
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 710: train_error=0.293938, test_error=4.606156
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 720: train_error=0.289016, test_error=4.610745
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 730: train_error=0.284260, test_error=4.615329
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 740: train_error=0.279662, test_error=4.619909
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 750: train_error=0.275212, test_error=4.624481
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 760: train_error=0.270905, test_error=4.629044
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 770: train_error=0.266732, test_error=4.633598
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 780: train_error=0.262687, test_error=4.638139
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 790: train_error=0.258765, test_error=4.642668
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 800: train_error=0.254959, test_error=4.647182
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 810: train_error=0.251263, test_error=4.651683
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 820: train_error=0.247673, test_error=4.656168
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 830: train_error=0.244184, test_error=4.660638
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 840: train_error=0.240792, test_error=4.665092
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 850: train_error=0.237491, test_error=4.669528
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 860: train_error=0.234278, test_error=4.673947
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 870: train_error=0.231150, test_error=4.678349
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 880: train_error=0.228101, test_error=4.682732
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 890: train_error=0.225131, test_error=4.687097
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 900: train_error=0.222234, test_error=4.691444
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 910: train_error=0.219407, test_error=4.695772
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 920: train_error=0.216649, test_error=4.700081
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 930: train_error=0.213957, test_error=4.704371
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 940: train_error=0.211327, test_error=4.708642
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 950: train_error=0.208757, test_error=4.712893
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 960: train_error=0.206246, test_error=4.717125
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 970: train_error=0.203790, test_error=4.721338
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 980: train_error=0.201389, test_error=4.725532
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 990: train_error=0.199039, test_error=4.729705
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1000: train_error=0.196739, test_error=4.733860
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1010: train_error=0.194487, test_error=4.737995
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1020: train_error=0.192282, test_error=4.742110
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1030: train_error=0.190122, test_error=4.746207
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1040: train_error=0.188006, test_error=4.750283
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1050: train_error=0.185931, test_error=4.754341
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1060: train_error=0.183897, test_error=4.758379
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1070: train_error=0.181902, test_error=4.762398
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1080: train_error=0.179945, test_error=4.766398
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1090: train_error=0.178025, test_error=4.770379
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1100: train_error=0.176141, test_error=4.774340
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1110: train_error=0.174291, test_error=4.778284
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1120: train_error=0.172475, test_error=4.782208
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1130: train_error=0.170691, test_error=4.786114
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_15636</span><span class="o">/</span><span class="mf">460896045.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">user_artists</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">init_stddev</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_iterations</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
+
+<span class="nn">~\AppData\Local\Temp/ipykernel_15636/701340561.py</span> in <span class="ni">train</span><span class="nt">(self, num_iterations, learning_rate, plot_results, optimizer)</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span>             <span class="c1"># Train and append results.</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span>             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iterations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">54</span>                 <span class="n">_</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">run</span><span class="p">((</span><span class="n">train_op</span><span class="p">,</span> <span class="n">metrics</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span>                 <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="n">num_iterations</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span>                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2"> iteration </span><span class="si">%d</span><span class="s2">: &quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\client\session.py</span> in <span class="ni">run</span><span class="nt">(self, fetches, feed_dict, options, run_metadata)</span>
+<span class="g g-Whitespace">    </span><span class="mi">968</span> 
+<span class="g g-Whitespace">    </span><span class="mi">969</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">970</span>       <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">fetches</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">,</span> <span class="n">options_ptr</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">971</span>                          <span class="n">run_metadata_ptr</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">972</span>       <span class="k">if</span> <span class="n">run_metadata</span><span class="p">:</span>
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\client\session.py</span> in <span class="ni">_run</span><span class="nt">(self, handle, fetches, feed_dict, options, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1191</span>     <span class="c1"># or if the call is a partial run that specifies feeds.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1192</span>     <span class="k">if</span> <span class="n">final_fetches</span> <span class="ow">or</span> <span class="n">final_targets</span> <span class="ow">or</span> <span class="p">(</span><span class="n">handle</span> <span class="ow">and</span> <span class="n">feed_dict_tensor</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1193</span>       <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_run</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">final_targets</span><span class="p">,</span> <span class="n">final_fetches</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1194</span>                              <span class="n">feed_dict_tensor</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">run_metadata</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1195</span>     <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\client\session.py</span> in <span class="ni">_do_run</span><span class="nt">(self, handle, target_list, fetch_list, feed_dict, options, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1371</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1372</span>     <span class="k">if</span> <span class="n">handle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1373</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_call</span><span class="p">(</span><span class="n">_run_fn</span><span class="p">,</span> <span class="n">feeds</span><span class="p">,</span> <span class="n">fetches</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1374</span>                            <span class="n">run_metadata</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1375</span>     <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\client\session.py</span> in <span class="ni">_do_call</span><span class="nt">(self, fn, *args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1378</span>   <span class="k">def</span> <span class="nf">_do_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1379</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1380</span>       <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1381</span>     <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">OpError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1382</span>       <span class="n">message</span> <span class="o">=</span> <span class="n">compat</span><span class="o">.</span><span class="n">as_text</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\client\session.py</span> in <span class="ni">_run_fn</span><span class="nt">(feed_dict, fetch_list, target_list, options, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1361</span>       <span class="c1"># Ensure any changes to the graph are reflected in the runtime.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1362</span>       <span class="bp">self</span><span class="o">.</span><span class="n">_extend_graph</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1363</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_tf_sessionrun</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">,</span> <span class="n">fetch_list</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1364</span>                                       <span class="n">target_list</span><span class="p">,</span> <span class="n">run_metadata</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1365</span> 
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\client\session.py</span> in <span class="ni">_call_tf_sessionrun</span><span class="nt">(self, options, feed_dict, fetch_list, target_list, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1454</span>   <span class="k">def</span> <span class="nf">_call_tf_sessionrun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">,</span> <span class="n">fetch_list</span><span class="p">,</span> <span class="n">target_list</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1455</span>                           <span class="n">run_metadata</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1456</span>     <span class="k">return</span> <span class="n">tf_session</span><span class="o">.</span><span class="n">TF_SessionRun_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1457</span>                                             <span class="n">fetch_list</span><span class="p">,</span> <span class="n">target_list</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1458</span>                                             <span class="n">run_metadata</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -580,10 +901,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 2000: train_error=3.203474, test_error=5.731326
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 2000: train_error=3.266350, test_error=5.835364
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;train_error&#39;: 3.2034738, &#39;test_error&#39;: 5.731326}]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;train_error&#39;: 3.26635, &#39;test_error&#39;: 5.8353643}]
 </pre></div>
 </div>
 <img alt="_images/Page 7 - Collaborative Filtering Recommender_13_2.png" src="_images/Page 7 - Collaborative Filtering Recommender_13_2.png" />
@@ -597,10 +918,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 2000: train_error=0.429625, test_error=3.266817
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 2000: train_error=0.434694, test_error=3.144789
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;train_error&#39;: 0.42962456, &#39;test_error&#39;: 3.266817}]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;train_error&#39;: 0.43469417, &#39;test_error&#39;: 3.1447892}]
 </pre></div>
 </div>
 <img alt="_images/Page 7 - Collaborative Filtering Recommender_14_2.png" src="_images/Page 7 - Collaborative Filtering Recommender_14_2.png" />
@@ -687,34 +1008,34 @@
   </thead>
   <tbody>
     <tr>
-      <th>325</th>
-      <td>8.141</td>
-      <td>Kanye West</td>
+      <th>3833</th>
+      <td>3.895</td>
+      <td>Bad Boys Blue</td>
     </tr>
     <tr>
-      <th>1391</th>
-      <td>5.762</td>
-      <td>MGMT</td>
+      <th>3227</th>
+      <td>3.765</td>
+      <td>Marillion</td>
     </tr>
     <tr>
-      <th>1455</th>
-      <td>5.619</td>
-      <td>ABBA</td>
+      <th>257</th>
+      <td>3.647</td>
+      <td>Jill Scott</td>
     </tr>
     <tr>
-      <th>3368</th>
-      <td>5.548</td>
-      <td>Antimatter</td>
+      <th>8177</th>
+      <td>3.606</td>
+      <td>Axel Fernando</td>
     </tr>
     <tr>
-      <th>66</th>
-      <td>5.438</td>
-      <td>Depeche Mode</td>
+      <th>1</th>
+      <td>3.570</td>
+      <td>Diary of Dreams</td>
     </tr>
     <tr>
-      <th>8454</th>
-      <td>5.398</td>
-      <td>Sick Animation</td>
+      <th>61</th>
+      <td>3.489</td>
+      <td>Madonna</td>
     </tr>
   </tbody>
 </table>
@@ -760,29 +1081,29 @@
       <td>Kanye West</td>
     </tr>
     <tr>
-      <th>1999</th>
-      <td>0.684</td>
-      <td>Lacuna Coil</td>
+      <th>9110</th>
+      <td>0.947</td>
+      <td>Airbag</td>
     </tr>
     <tr>
-      <th>11453</th>
-      <td>0.671</td>
-      <td>Frontside</td>
+      <th>176</th>
+      <td>0.931</td>
+      <td>Keane</td>
     </tr>
     <tr>
-      <th>17430</th>
-      <td>0.633</td>
-      <td>Tagtraum</td>
+      <th>2570</th>
+      <td>0.924</td>
+      <td>Auto!Automatic!!</td>
     </tr>
     <tr>
-      <th>2164</th>
-      <td>0.629</td>
-      <td>50 Cent</td>
+      <th>683</th>
+      <td>0.923</td>
+      <td>Florence + the Machine</td>
     </tr>
     <tr>
-      <th>469</th>
-      <td>0.626</td>
-      <td>Eminem</td>
+      <th>5825</th>
+      <td>0.922</td>
+      <td>Cash Cash</td>
     </tr>
   </tbody>
 </table>
@@ -798,7 +1119,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1000: train_error=0.363502, test_error=2.011730Nearest neighbors of : Kanye West.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1000: train_error=0.365735, test_error=1.977160Nearest neighbors of : Kanye West.
 [Found more than one matching artist. Other candidates: Kanye West &amp; Jay-Z, Kanye West, Beyoncé &amp; Charlie Wilson, Kanye West feat. Pusha T MpTri.Net, Eminem feat. Drake, Kanye West, Lil Wayne, The-Dream f. Kanye West, Jamie Foxx feat. Kanye West and The-Dream]
 </pre></div>
 </div>
@@ -827,33 +1148,33 @@
   <tbody>
     <tr>
       <th>325</th>
-      <td>5.193</td>
+      <td>6.341</td>
       <td>Kanye West</td>
     </tr>
     <tr>
-      <th>282</th>
-      <td>3.924</td>
-      <td>Rihanna</td>
-    </tr>
-    <tr>
       <th>300</th>
-      <td>3.651</td>
+      <td>5.148</td>
       <td>Black Eyed Peas</td>
     </tr>
     <tr>
-      <th>739</th>
-      <td>3.549</td>
-      <td>Boards of Canada</td>
-    </tr>
-    <tr>
-      <th>1089</th>
-      <td>3.296</td>
-      <td>Björk</td>
-    </tr>
-    <tr>
       <th>894</th>
-      <td>3.118</td>
+      <td>4.058</td>
       <td>Amy Winehouse</td>
+    </tr>
+    <tr>
+      <th>458</th>
+      <td>3.739</td>
+      <td>3OH!3</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>3.653</td>
+      <td>Daft Punk</td>
+    </tr>
+    <tr>
+      <th>455</th>
+      <td>3.374</td>
+      <td>Miley Cyrus</td>
     </tr>
   </tbody>
 </table>
@@ -890,29 +1211,29 @@
       <td>Kanye West</td>
     </tr>
     <tr>
-      <th>9469</th>
-      <td>0.747</td>
-      <td>Griffin House</td>
+      <th>11036</th>
+      <td>0.724</td>
+      <td>Eminem feat. Drake, Kanye West, Lil Wayne</td>
     </tr>
     <tr>
-      <th>9474</th>
-      <td>0.742</td>
-      <td>Ceumar</td>
+      <th>6179</th>
+      <td>0.683</td>
+      <td>Lady GaGa Ft. Beyoncé</td>
     </tr>
     <tr>
-      <th>9472</th>
-      <td>0.728</td>
-      <td>8 Femmes</td>
+      <th>9154</th>
+      <td>0.679</td>
+      <td>Nancy Ajram</td>
     </tr>
     <tr>
-      <th>131</th>
-      <td>0.727</td>
-      <td>Worm Is Green</td>
+      <th>277</th>
+      <td>0.676</td>
+      <td>Ana Carolina</td>
     </tr>
     <tr>
-      <th>9466</th>
-      <td>0.709</td>
-      <td>Joan Baez</td>
+      <th>4606</th>
+      <td>0.658</td>
+      <td>John Legend</td>
     </tr>
   </tbody>
 </table>
@@ -974,13 +1295,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 2000: train_error_observed=0.148426, test_error_observed=2.564600, observed_loss=0.148426, regularization_loss=0.468762, gravity_loss=0.191872
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 2000: train_error_observed=0.148672, test_error_observed=2.516972, observed_loss=0.148672, regularization_loss=0.467933, gravity_loss=0.192609
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;train_error_observed&#39;: 0.14842603, &#39;test_error_observed&#39;: 2.5646002},
- {&#39;observed_loss&#39;: 0.14842603,
-  &#39;regularization_loss&#39;: 0.46876213,
-  &#39;gravity_loss&#39;: 0.19187193}]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;train_error_observed&#39;: 0.14867209, &#39;test_error_observed&#39;: 2.5169723},
+ {&#39;observed_loss&#39;: 0.14867209,
+  &#39;regularization_loss&#39;: 0.46793318,
+  &#39;gravity_loss&#39;: 0.19260909}]
 </pre></div>
 </div>
 <img alt="_images/Page 7 - Collaborative Filtering Recommender_22_2.png" src="_images/Page 7 - Collaborative Filtering Recommender_22_2.png" />
@@ -1023,33 +1344,33 @@
   <tbody>
     <tr>
       <th>325</th>
-      <td>18.690</td>
+      <td>21.095</td>
       <td>Kanye West</td>
     </tr>
     <tr>
+      <th>221</th>
+      <td>15.184</td>
+      <td>The Beatles</td>
+    </tr>
+    <tr>
+      <th>283</th>
+      <td>14.188</td>
+      <td>Britney Spears</td>
+    </tr>
+    <tr>
       <th>294</th>
-      <td>12.142</td>
+      <td>12.577</td>
       <td>Katy Perry</td>
     </tr>
     <tr>
-      <th>894</th>
-      <td>12.032</td>
-      <td>Amy Winehouse</td>
-    </tr>
-    <tr>
-      <th>300</th>
-      <td>11.777</td>
-      <td>Black Eyed Peas</td>
-    </tr>
-    <tr>
       <th>83</th>
-      <td>11.439</td>
+      <td>11.557</td>
       <td>Lady Gaga</td>
     </tr>
     <tr>
-      <th>148</th>
-      <td>11.289</td>
-      <td>Radiohead</td>
+      <th>228</th>
+      <td>11.408</td>
+      <td>Nirvana</td>
     </tr>
   </tbody>
 </table>
@@ -1086,29 +1407,29 @@
       <td>Kanye West</td>
     </tr>
     <tr>
-      <th>12493</th>
-      <td>0.674</td>
-      <td>Timbaland feat. Keri Hilson &amp; D.O.E.</td>
+      <th>1072</th>
+      <td>0.687</td>
+      <td>Ace of Base</td>
     </tr>
     <tr>
-      <th>3959</th>
-      <td>0.670</td>
-      <td>Major Lazer</td>
+      <th>1600</th>
+      <td>0.666</td>
+      <td>Lykke Li</td>
     </tr>
     <tr>
-      <th>265</th>
-      <td>0.664</td>
-      <td>Mos Def</td>
+      <th>965</th>
+      <td>0.659</td>
+      <td>Amy Studt</td>
     </tr>
     <tr>
-      <th>12489</th>
-      <td>0.653</td>
-      <td>Mary J Blige</td>
-    </tr>
-    <tr>
-      <th>3964</th>
+      <th>11027</th>
       <td>0.650</td>
-      <td>Penguin Prison</td>
+      <td>drake and lil wayne</td>
+    </tr>
+    <tr>
+      <th>3425</th>
+      <td>0.650</td>
+      <td>[unknown]</td>
     </tr>
   </tbody>
 </table>
@@ -1154,6 +1475,15 @@
             </div>
         </a>
     </div>
+     <div id="next">
+        <a class="right-next" href="Page%208%20-%20Using%20the%20Recommender%20Systems.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Using the Recommender Systems</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         

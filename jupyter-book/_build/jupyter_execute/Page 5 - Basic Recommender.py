@@ -90,7 +90,7 @@ plt.gca().set(
 );
 
 
-# Make a comment about these graphs.
+# It's clear from the first graph that almost all of the artists in the dataset have less than 100 users listening to them. We can also see that the average rating received by artists has a negative linear relationship. This will make sense as users are shown lots of artists but may only listen to a small amount more regularly.
 
 # ## Recommending the Top 5 Artists that You Might Like
 
