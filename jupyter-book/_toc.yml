@@ -4,4 +4,9 @@
 format: jb-book
 root: Introduction
 chapters:
+- file: Data Exploration
 - file: Adjusting User-Artist Weights
+- file: Assigning tags to artists
+- file: Basic Top Artists Recommender Workings
+- file: Using the Recommender System
+- file: Colab part 2

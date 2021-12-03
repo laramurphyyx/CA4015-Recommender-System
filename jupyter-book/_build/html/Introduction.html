@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LastFM Recommender System Assignment &#8212; My sample book</title>
+    <title>Background &#8212; CA4015 - Assignment 3 &amp; 4</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,7 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Adjusting User-Artist Weights" href="Adjusting%20User-Artist%20Weights.html" />
+    <link rel="next" title="Data Exploration" href="Data%20Exploration.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -77,7 +77,7 @@
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">My sample book</h1>
+      <h1 class="site-logo" id="site-title">CA4015 - Assignment 3 & 4</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -88,14 +88,39 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1 current">
   <a class="reference internal" href="#">
-   LastFM Recommender System Assignment
+   Background
   </a>
  </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="Data%20Exploration.html">
+   Data Exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="Adjusting%20User-Artist%20Weights.html">
    Adjusting User-Artist Weights
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Assigning%20tags%20to%20artists.html">
+   Assigning Tags to Artists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Basic%20Top%20Artists%20Recommender%20Workings.html">
+   Basic Recommender System Workings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Using%20the%20Recommender%20System.html">
+   Guideline to use the Basic Recommender System
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Colab%20part%202.html">
+   Tensorflow Recommender System
   </a>
  </li>
 </ul>
@@ -155,11 +180,11 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/laramurphyyx/CA4015-Recommender-System/tree/main/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FIntroduction.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/laramurphyyx/CA4015-Recommender-System/tree/main/jupyter-book/issues/new?title=Issue%20on%20page%20%2FIntroduction.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -186,8 +211,18 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#about-the-data">
-   About the Data
+  <a class="reference internal nav-link" href="#what-are-recommender-systems">
+   What are Recommender Systems?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-recommender-systems-work">
+   How do Recommender Systems Work?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-the-data-used-in-our-recommender-system">
+   About the Data used in our Recommender System
   </a>
  </li>
 </ul>
@@ -201,11 +236,26 @@
         
               <div>
                 
-  <div class="section" id="lastfm-recommender-system-assignment">
-<h1>LastFM Recommender System Assignment<a class="headerlink" href="#lastfm-recommender-system-assignment" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="about-the-data">
-<h2>About the Data<a class="headerlink" href="#about-the-data" title="Permalink to this headline">¶</a></h2>
-<p>The LastFM dataset contains information about 92,800 artists and 1,892 users. The data is comprised of 6 files:</p>
+  <div class="section" id="background">
+<h1>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-are-recommender-systems">
+<h2>What are Recommender Systems?<a class="headerlink" href="#what-are-recommender-systems" title="Permalink to this headline">¶</a></h2>
+<p>Recommender systems are machine-learning based algorithms that can ‘learn’ what a user might like to see, based on the information it has about the user or the product/item. Recommender systems can be seen in many services that we use regularly, such as Amazon recommending products to us or Facebook recommending people we may know. Some companies rely heavily on the use of these techniques and algorithms, such as Netflix, where their business model and its success are influenced by the accuracy of their recommendations.</p>
+</div>
+<div class="section" id="how-do-recommender-systems-work">
+<h2>How do Recommender Systems Work?<a class="headerlink" href="#how-do-recommender-systems-work" title="Permalink to this headline">¶</a></h2>
+<p>There are several approaches that can be taken to build a recommender system. Some of which are:</p>
+<ul class="simple">
+<li><p><b>Simple Recommenders</b>: These are the easiest to implement. This is a simple recommender system that shows the user what is popular. This is a generalised method of recommending, although the idea behind this system is that things that are more popular and more liked will be more likely to be enjoyed by the average audience.</p></li>
+<li><p><b>Collaborative Filtering</b>: This method is more complex than the above Simple Recommender, as it is more specific to the user. This method ignores information about the target item (song, movie, etc.), and just bases its recommendation purely on user information/opinions. The concept of collaborative filtering is based on the idea that user A has the same likes/dislikes/opinions as user B, that user A is more likely to have the same opinion as user B on a different issue than a randomly chosen user. (<a class="reference external" href="https://www.datacamp.com/community/tutorials/recommender-systems-python">Interesting link about user-based vs. item-based</a>)</p></li>
+<li><p><b>Content-Based Recommenders</b>: This approach uses the item’s metadata, for example the metadata held for a movie would be it’s genre, director, description or actors. This algorithm identifies the genres/directors/actors that a user generally likes, and uses this as a guide for future recommendations.</p></li>
+<li><p><b>Hybrid Approach</b>: This approach is a combination of collaborative filtering and content-based recommenders. This can be quite difficult to implement, although when optimized, can outperform both methods of recommending.</p></li>
+</ul>
+</div>
+<div class="section" id="about-the-data-used-in-our-recommender-system">
+<h2>About the Data used in our Recommender System<a class="headerlink" href="#about-the-data-used-in-our-recommender-system" title="Permalink to this headline">¶</a></h2>
+<p>Our Recommender System is based on artists from the LastFM dataset.
+The LastFM dataset contains information about 92,800 artists and 1,892 users. The data is comprised of 6 files:</p>
 <ul class="simple">
 <li><p>artists.dat : This file contains information about the artist, such as their ID, their name, and URLs associated with them</p></li>
 <li><p>tags.dat : This file contains a mapping for each tag ID and the tag description</p></li>
@@ -251,10 +301,10 @@
 <div class='prev-next-bottom'>
     
      <div id="next">
-        <a class="right-next" href="Adjusting%20User-Artist%20Weights.html" title="next page">
+        <a class="right-next" href="Data%20Exploration.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Adjusting User-Artist Weights</p>
+                <p class="prevnext-title">Data Exploration</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
@@ -268,7 +318,7 @@
     <div class="container">
       <p>
         
-          By The Jupyter Book Community<br/>
+          By Lara Murphy<br/>
         
             &copy; Copyright 2021.<br/>
       </p>

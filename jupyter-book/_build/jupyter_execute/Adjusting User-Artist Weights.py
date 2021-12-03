@@ -25,11 +25,11 @@ dataframe_names = [
     'user_artists']
 
 file_names = [
-    '../data/user_friends.dat',
-    '../data/user_taggedartists.dat',
-    '../data/artists.dat',
+    '../data/user_friends.csv',
+    '../data/user_taggedartists.csv',
+    '../data/artists.csv',
     '../data/tags.dat',
-    '../data/user_artists.dat']
+    '../data/user_artists.csv']
 
 
 # In[3]:
@@ -39,7 +39,7 @@ for (dataframe, file) in zip(dataframe_names, file_names):
     if dataframe == 'tags':
         vars()[dataframe] = pd.read_table(file, sep="\t", encoding = "latin-1")
     else:
-        vars()[dataframe] = pd.read_table(file, sep="\t")
+        vars()[dataframe] = pd.read_csv(file)
 
 
 # ## Exploring the data
@@ -129,10 +129,10 @@ plt.gca().set(
 # In[9]:
 
 
-data = user_artists[user_artists['userID']==2]['weight']
+data = user_artists[user_artists['userID']==0]['weight']
 plt.hist(data, weights=np.ones(len(data)) / len(data), bins=100)
 plt.gca().set(
-    title='Distribution of Weights for User #2', 
+    title='Distribution of Weights for User #0', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
@@ -141,10 +141,10 @@ plt.gca().set(
 # In[10]:
 
 
-data = user_artists[user_artists['userID']==6]['weight']
+data = user_artists[user_artists['userID']==4]['weight']
 plt.hist(data, weights=np.ones(len(data)) / len(data), bins=range(0,42))
 plt.gca().set(
-    title='Distribution of Weights for User #6', 
+    title='Distribution of Weights for User #4', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
@@ -153,10 +153,10 @@ plt.gca().set(
 # In[11]:
 
 
-data = user_artists[user_artists['userID']==7]['weight']
+data = user_artists[user_artists['userID']==5]['weight']
 plt.hist(data, weights=np.ones(len(data)) / len(data), bins=100)
 plt.gca().set(
-    title='Distribution of Weights for User #7', 
+    title='Distribution of Weights for User #5', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
@@ -165,10 +165,10 @@ plt.gca().set(
 # In[12]:
 
 
-data = user_artists[user_artists['userID']==700]['weight']
+data = user_artists[user_artists['userID']==652]['weight']
 plt.hist(data, weights=np.ones(len(data)) / len(data), bins=100)
 plt.gca().set(
-    title='Distribution of Weights for User #700', 
+    title='Distribution of Weights for User #652', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
@@ -177,16 +177,16 @@ plt.gca().set(
 # In[13]:
 
 
-data = user_artists[user_artists['userID']==2100]['weight']
+data = user_artists[user_artists['userID']==1891]['weight']
 plt.hist(data, weights=np.ones(len(data)) / len(data), bins=100)
 plt.gca().set(
-    title='Distribution of Weights for User #2100', 
+    title='Distribution of Weights for User #1891', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
 
 
-# All of the above figures, for users #2, #6, #7, #700, #2100, have a long-tailed distribution. 
+# All of the above figures, for users #0, #4, #5, #652, #1891, have a long-tailed distribution. 
 # 
 # This makes the distribution of ratings slightly more tricky.
 # 
@@ -198,7 +198,7 @@ plt.gca().set(
 # In[14]:
 
 
-data = user_artists[user_artists['userID']==2]['weight']
+data = user_artists[user_artists['userID']==0]['weight']
 plt.hist(data, weights=np.ones(len(data)) / len(data), bins=100)
 
 ## Assigning the mean and the standard deviation and then plotting them
@@ -213,7 +213,7 @@ plt.axvline(mean + (1.5 * std), color='k', linestyle='dashed', linewidth=1)
 plt.axvline(mean + (2.5 * std), color='k', linestyle='dashed', linewidth=1)
 
 plt.gca().set(
-    title='Weight Distribution of User #2 with Mean and Standard Deviation', 
+    title='Weight Distribution of User #0 with Mean and Standard Deviation', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
@@ -222,7 +222,7 @@ plt.gca().set(
 # In[15]:
 
 
-data = user_artists[user_artists['userID']==6]['weight']
+data = user_artists[user_artists['userID']==4]['weight']
 plt.hist(data, weights=np.ones(len(data)) / len(data), bins=range(0,50))
 
 ## Assigning the mean and the standard deviation and then plotting them
@@ -237,7 +237,7 @@ plt.axvline(mean + (1.5 * std), color='k', linestyle='dashed', linewidth=1)
 plt.axvline(mean + (2.5 * std), color='k', linestyle='dashed', linewidth=1)
 
 plt.gca().set(
-    title='Weight Distribution of User #6 with Mean and Standard Deviation', 
+    title='Weight Distribution of User #4 with Mean and Standard Deviation', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
@@ -246,7 +246,7 @@ plt.gca().set(
 # In[16]:
 
 
-data = user_artists[user_artists['userID']==7]['weight']
+data = user_artists[user_artists['userID']==5]['weight']
 mean = data.mean()
 std = np.std(data)
 
@@ -260,7 +260,7 @@ plt.axvline(mean + (1.5 * std), color='k', linestyle='dashed', linewidth=1)
 plt.axvline(mean + (2.5 * std), color='k', linestyle='dashed', linewidth=1)
 
 plt.gca().set(
-    title='Weight Distribution of User #7 with Mean and Standard Deviation', 
+    title='Weight Distribution of User #5 with Mean and Standard Deviation', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
@@ -269,7 +269,7 @@ plt.gca().set(
 # In[17]:
 
 
-data = user_artists[user_artists['userID']==700]['weight']
+data = user_artists[user_artists['userID']==652]['weight']
 plt.hist(data, weights=np.ones(len(data)) / len(data), bins=100)
 
 ## Assigning the mean and the standard deviation and then plotting them
@@ -284,7 +284,7 @@ plt.axvline(mean + (1.5 * std), color='k', linestyle='dashed', linewidth=1)
 plt.axvline(mean + (2.5 * std), color='k', linestyle='dashed', linewidth=1)
 
 plt.gca().set(
-    title='Weight Distribution of User #700 with Mean and Standard Deviation', 
+    title='Weight Distribution of User #652 with Mean and Standard Deviation', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
@@ -293,7 +293,7 @@ plt.gca().set(
 # In[18]:
 
 
-data = user_artists[user_artists['userID']==2100]['weight']
+data = user_artists[user_artists['userID']==1891]['weight']
 plt.hist(data, weights=np.ones(len(data)) / len(data), bins=100)
 
 ## Assigning the mean and the standard deviation and then plotting them
@@ -308,7 +308,7 @@ plt.axvline(mean + (1.5 * std), color='k', linestyle='dashed', linewidth=1)
 plt.axvline(mean + (2.5 * std), color='k', linestyle='dashed', linewidth=1)
 
 plt.gca().set(
-    title='Weight Distribution of User #2100 with Mean and Standard Deviation', 
+    title='Weight Distribution of User #1891 with Mean and Standard Deviation', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
@@ -316,42 +316,42 @@ plt.gca().set(
 
 # These five graphs show us that using the mean and standard deviation as a method to assign our-star ratings, it would have some key performance issues.
 # 
-# This method does not prove very efficient as there are no occurrences of a 1-star rating for all users examined. It also does not apply to users who have outlier-like values, such as user #7 having one occurence of a weight above 40,000 which increases the standard deviation substantially, and results in majority of their weights belonging to the 3-star rating zone.
+# This method does not prove very efficient as there are no occurrences of a 1-star rating for all users examined. It also does not apply to users who have outlier-like values, such as user #5 having one occurence of a weight above 40,000 which increases the standard deviation substantially, and results in majority of their weights belonging to the 3-star rating zone.
 # 
-# This issue with user #7 could be solved with outlier exclusion. Excluding outliers will reduce the size of the standard deviation, allowing the assignment of ratings to be more spread out, which may solve the issue of 1-star ratings also.
+# This issue with user #5 could be solved with outlier exclusion. Excluding outliers will reduce the size of the standard deviation, allowing the assignment of ratings to be more spread out, which may solve the issue of 1-star ratings also.
 
-# ## Removing Outliers for User #7
+# ## Removing Outliers for User #5
 
 # In[19]:
 
 
-user7 = user_artists[user_artists['userID']==7]
-user7_mean = user7['weight'].mean()
-user7_std = np.std(user7['weight'])
+user5 = user_artists[user_artists['userID']==5]
+user5_mean = user5['weight'].mean()
+user5_std = np.std(user5['weight'])
 
 
 # In[20]:
 
 
-user7_adjusted = user7[abs(user7['weight']-user7_mean)<(2*user7_std)]
-user7_mean_adjusted = user7_adjusted['weight'].mean()
-user7_std_adjusted = np.std(user7_adjusted['weight'])
+user5_adjusted = user5[abs(user5['weight']-user5_mean)<(2*user5_std)]
+user5_mean_adjusted = user5_adjusted['weight'].mean()
+user5_std_adjusted = np.std(user5_adjusted['weight'])
 
 
 # In[21]:
 
 
-plt.hist(user7_adjusted, bins = 50)
+plt.hist(user5_adjusted, bins = 50)
 
-plt.axvline(user7_mean_adjusted, color='red', linestyle='dashed', linewidth=1)
-plt.axvline(user7_mean_adjusted - (2.5 * user7_std_adjusted), color='k', linestyle='dashed', linewidth=1)
-plt.axvline(user7_mean_adjusted - (1.5 * user7_std_adjusted), color='k', linestyle='dashed', linewidth=1)
-plt.axvline(user7_mean_adjusted - (0.5 * user7_std_adjusted), color='k', linestyle='dashed', linewidth=1)
-plt.axvline(user7_mean_adjusted + (0.5 * user7_std_adjusted), color='k', linestyle='dashed', linewidth=1)
-plt.axvline(user7_mean_adjusted + (1.5 * user7_std_adjusted), color='k', linestyle='dashed', linewidth=1)
-plt.axvline(user7_mean_adjusted + (2.5 * user7_std_adjusted), color='k', linestyle='dashed', linewidth=1)
+plt.axvline(user5_mean_adjusted, color='red', linestyle='dashed', linewidth=1)
+plt.axvline(user5_mean_adjusted - (2.5 * user5_std_adjusted), color='k', linestyle='dashed', linewidth=1)
+plt.axvline(user5_mean_adjusted - (1.5 * user5_std_adjusted), color='k', linestyle='dashed', linewidth=1)
+plt.axvline(user5_mean_adjusted - (0.5 * user5_std_adjusted), color='k', linestyle='dashed', linewidth=1)
+plt.axvline(user5_mean_adjusted + (0.5 * user5_std_adjusted), color='k', linestyle='dashed', linewidth=1)
+plt.axvline(user5_mean_adjusted + (1.5 * user5_std_adjusted), color='k', linestyle='dashed', linewidth=1)
+plt.axvline(user5_mean_adjusted + (2.5 * user5_std_adjusted), color='k', linestyle='dashed', linewidth=1)
 plt.gca().set(
-    title='Weight Distribution of User #7 with Mean and Standard Deviation (after outlier exclusion)', 
+    title='Weight Distribution of User #5 with Mean and Standard Deviation (after outlier exclusion)', 
     xlabel='Weight Values',
     ylabel='Frequency'
 );
@@ -717,5 +717,11 @@ user_artists.drop(['mean', 'min', 'max'], axis = 1, inplace = True)
 # In[49]:
 
 
-user_artists.to_csv('../data/user_artists_ratings.csv')
+user_artists
+
+
+# In[50]:
+
+
+user_artists.to_csv('../data/user_artists_ratings.csv', index=False)
 

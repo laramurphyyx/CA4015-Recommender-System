@@ -1,0 +1,1129 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tensorflow Recommender System &#8212; CA4015 - Assignment 3 &amp; 4</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Guideline to use the Basic Recommender System" href="Using%20the%20Recommender%20System.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">CA4015 - Assignment 3 & 4</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Introduction.html">
+   Background
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Data%20Exploration.html">
+   Data Exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Adjusting%20User-Artist%20Weights.html">
+   Adjusting User-Artist Weights
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Assigning%20tags%20to%20artists.html">
+   Assigning Tags to Artists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Basic%20Top%20Artists%20Recommender%20Workings.html">
+   Basic Recommender System Workings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Using%20the%20Recommender%20System.html">
+   Guideline to use the Basic Recommender System
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Tensorflow Recommender System
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Colab part 2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/laramurphyyx/CA4015-Recommender-System/tree/main/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/laramurphyyx/CA4015-Recommender-System/tree/main/jupyter-book/issues/new?title=Issue%20on%20page%20%2FColab part 2.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/laramurphyyx/CA4015-Recommender-System/master?urlpath=tree/docs/Colab part 2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Tensorflow Recommender System
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#importing-relevant-packages-and-datasets">
+     Importing Relevant Packages and Datasets
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-functions-to-build-sparse-tensor-and-calculate-mse">
+     Creating Functions to Build Sparse Tensor and Calculate MSE
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-functions-to-build-a-collaborative-filtering-model">
+     Creating Functions to Build a Collaborative-Filtering Model
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#building-and-training-the-model">
+     Building and Training the Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inspect-embeddings">
+   Inspect Embeddings
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="tensorflow-recommender-system">
+<h1>Tensorflow Recommender System<a class="headerlink" href="#tensorflow-recommender-system" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="importing-relevant-packages-and-datasets">
+<h2>Importing Relevant Packages and Datasets<a class="headerlink" href="#importing-relevant-packages-and-datasets" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">import</span> <span class="nn">sklearn.manifold</span>
+<span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+
+<span class="c1"># Add some convenience functions to Pandas DataFrame.</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="k">def</span> <span class="nf">mask</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Returns a filtered dataframe, by applying function to key&quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">function</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">key</span><span class="p">])]</span>
+
+<span class="k">def</span> <span class="nf">flatten_cols</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+  <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+  <span class="k">return</span> <span class="n">df</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">flatten_cols</span> <span class="o">=</span> <span class="n">flatten_cols</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\laram\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\compat\v2_compat.py:111: disable_resource_variables (from tensorflow.python.ops.variable_scope) is deprecated and will be removed in a future version.
+Instructions for updating:
+non-resource variables are not supported in the long term
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_artists</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/user_artists_ratings.csv&#39;</span><span class="p">)</span>
+<span class="n">user_friends</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/user_friends.csv&#39;</span><span class="p">)</span>
+<span class="n">user_taggedartists</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/user_taggedartists.csv&#39;</span><span class="p">)</span>
+<span class="n">artists</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/artists.csv&#39;</span><span class="p">)</span>
+<span class="n">tags</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;../data/tags.dat&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+<span class="n">artists_tags</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/artists_tags.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-functions-to-build-sparse-tensor-and-calculate-mse">
+<h2>Creating Functions to Build Sparse Tensor and Calculate MSE<a class="headerlink" href="#creating-functions-to-build-sparse-tensor-and-calculate-mse" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_rating_sparse_tensor</span><span class="p">(</span><span class="n">user_artists_df</span><span class="p">):</span>
+
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">user_artists_df</span><span class="p">[[</span><span class="s1">&#39;userID&#39;</span><span class="p">,</span> <span class="s1">&#39;artistID&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">user_artists_df</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">SparseTensor</span><span class="p">(</span>
+        <span class="n">indices</span><span class="o">=</span><span class="n">indices</span><span class="p">,</span>
+        <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">,</span>
+        <span class="n">dense_shape</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">user_artists</span><span class="o">.</span><span class="n">userID</span><span class="o">.</span><span class="n">unique</span><span class="p">()),</span> <span class="n">artists</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sparse_mean_square_error</span><span class="p">(</span><span class="n">sparse_ratings</span><span class="p">,</span> <span class="n">user_embeddings</span><span class="p">,</span> <span class="n">music_embeddings</span><span class="p">):</span>
+
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">user_embeddings</span><span class="p">,</span> <span class="n">sparse_ratings</span><span class="o">.</span><span class="n">indices</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">*</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">music_embeddings</span><span class="p">,</span> <span class="n">sparse_ratings</span><span class="o">.</span><span class="n">indices</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span>
+        <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">sparse_ratings</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">loss</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-functions-to-build-a-collaborative-filtering-model">
+<h2>Creating Functions to Build a Collaborative-Filtering Model<a class="headerlink" href="#creating-functions-to-build-a-collaborative-filtering-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CFModel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simple class that represents a collaborative filtering model&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embedding_vars</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initializes a CFModel.</span>
+<span class="sd">        Args:</span>
+<span class="sd">          embedding_vars: A dictionary of tf.Variables.</span>
+<span class="sd">          loss: A float Tensor. The loss to optimize.</span>
+<span class="sd">          metrics: optional list of dictionaries of Tensors. The metrics in each</span>
+<span class="sd">            dictionary will be plotted in a separate figure during training.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_embedding_vars</span> <span class="o">=</span> <span class="n">embedding_vars</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loss</span> <span class="o">=</span> <span class="n">loss</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_metrics</span> <span class="o">=</span> <span class="n">metrics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_embeddings</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">embedding_vars</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">embeddings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The embeddings dictionary.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_embeddings</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">plot_results</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+              <span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">GradientDescentOptimizer</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Trains the model.</span>
+<span class="sd">        Args:</span>
+<span class="sd">          iterations: number of iterations to run.</span>
+<span class="sd">          learning_rate: optimizer learning rate.</span>
+<span class="sd">          plot_results: whether to plot the results at the end of training.</span>
+<span class="sd">          optimizer: the optimizer to use. Default to GradientDescentOptimizer.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">          The metrics dictionary evaluated at the last iteration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+            <span class="n">opt</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">)</span>
+            <span class="n">train_op</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loss</span><span class="p">)</span>
+            <span class="n">local_init_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">variables_initializer</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">variables</span><span class="p">()),</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">local_variables_initializer</span><span class="p">())</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">tables_initializer</span><span class="p">())</span>
+                    <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">start_queue_runners</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+            <span class="n">local_init_op</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+            <span class="n">iterations</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">metrics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metrics</span> <span class="ow">or</span> <span class="p">({},)</span>
+            <span class="n">metrics_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metrics</span><span class="p">]</span>
+
+            <span class="c1"># Train and append results.</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iterations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">run</span><span class="p">((</span><span class="n">train_op</span><span class="p">,</span> <span class="n">metrics</span><span class="p">))</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="n">num_iterations</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2"> iteration </span><span class="si">%d</span><span class="s2">: &quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="p">[</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">items</span><span class="p">()]),</span>
+                          <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="n">iterations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">metric_val</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">metrics_vals</span><span class="p">,</span> <span class="n">results</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                            <span class="n">metric_val</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_embedding_vars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_embeddings</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">plot_results</span><span class="p">:</span>
+                <span class="c1"># Plot the metrics.</span>
+                <span class="n">num_subplots</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+                <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="n">num_subplots</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">metric_vals</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">metrics_vals</span><span class="p">):</span>
+                    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_subplots</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">metric_vals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iterations</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">])</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Iterations&quot;</span><span class="p">)</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean Squared Error&quot;</span><span class="p">)</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Training and Testing Errors&quot;</span><span class="p">)</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_model</span><span class="p">(</span><span class="n">ratings</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">init_stddev</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+    
+    <span class="c1"># Split the ratings DataFrame into train and test</span>
+    <span class="n">train_ratings</span><span class="p">,</span> <span class="n">test_ratings</span> <span class="o">=</span> <span class="n">split_dataframe</span><span class="p">(</span><span class="n">ratings</span><span class="p">)</span>
+    <span class="c1"># SparseTensor representation of the train and test datasets.</span>
+    <span class="n">A_train</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor_ratings</span><span class="p">(</span><span class="n">train_ratings</span><span class="p">)</span>
+    <span class="n">A_test</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor_ratings</span><span class="p">(</span><span class="n">test_ratings</span><span class="p">)</span>
+    <span class="c1"># Initialize the embeddings using a normal distribution.</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_normal</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">A_train</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">embedding_dim</span><span class="p">],</span> <span class="n">stddev</span><span class="o">=</span><span class="n">init_stddev</span><span class="p">))</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_normal</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">A_train</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">embedding_dim</span><span class="p">],</span> <span class="n">stddev</span><span class="o">=</span><span class="n">init_stddev</span><span class="p">))</span>
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">sparse_mean_square_error</span><span class="p">(</span><span class="n">A_train</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+    <span class="n">test_loss</span> <span class="o">=</span> <span class="n">sparse_mean_square_error</span><span class="p">(</span><span class="n">A_test</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;train_error&#39;</span><span class="p">:</span> <span class="n">train_loss</span><span class="p">,</span>
+        <span class="s1">&#39;test_error&#39;</span><span class="p">:</span> <span class="n">test_loss</span>
+    <span class="p">}</span>
+    <span class="n">embeddings</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;userID&quot;</span><span class="p">:</span> <span class="n">U</span><span class="p">,</span>
+        <span class="s2">&quot;artistID&quot;</span><span class="p">:</span> <span class="n">V</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">CFModel</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">train_loss</span><span class="p">,</span> <span class="p">[</span><span class="n">metrics</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">split_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">holdout_fraction</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+  
+    <span class="n">test</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="n">holdout_fraction</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="building-and-training-the-model">
+<h2>Building and Training the Model<a class="headerlink" href="#building-and-training-the-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">user_artists</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">init_stddev</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_iterations</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_20012</span><span class="o">/</span><span class="mf">460896045.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">user_artists</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">init_stddev</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_iterations</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
+
+<span class="nn">~\AppData\Local\Temp/ipykernel_20012/3999473338.py</span> in <span class="ni">build_model</span><span class="nt">(ratings, embedding_dim, init_stddev)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">train_ratings</span><span class="p">,</span> <span class="n">test_ratings</span> <span class="o">=</span> <span class="n">split_dataframe</span><span class="p">(</span><span class="n">ratings</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="c1"># SparseTensor representation of the train and test datasets.</span>
+<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">A_train</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor_ratings</span><span class="p">(</span><span class="n">train_ratings</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">A_test</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor_ratings</span><span class="p">(</span><span class="n">test_ratings</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="c1"># Initialize the embeddings using a normal distribution.</span>
+
+<span class="ne">NameError</span>: name &#39;build_rating_sparse_tensor_ratings&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">user_artists</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">init_stddev</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_iterations</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 2000: train_error=3.203474, test_error=5.731326
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;train_error&#39;: 3.2034738, &#39;test_error&#39;: 5.731326}]
+</pre></div>
+</div>
+<img alt="_images/Colab part 2_13_2.png" src="_images/Colab part 2_13_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">user_artists</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">init_stddev</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_iterations</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 2000: train_error=0.429625, test_error=3.266817
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;train_error&#39;: 0.42962456, &#39;test_error&#39;: 3.266817}]
+</pre></div>
+</div>
+<img alt="_images/Colab part 2_14_2.png" src="_images/Colab part 2_14_2.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="inspect-embeddings">
+<h1>Inspect Embeddings<a class="headerlink" href="#inspect-embeddings" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DOT</span> <span class="o">=</span> <span class="s1">&#39;dot&#39;</span>
+<span class="n">COSINE</span> <span class="o">=</span> <span class="s1">&#39;cosine&#39;</span>
+<span class="k">def</span> <span class="nf">compute_scores</span><span class="p">(</span><span class="n">query_embedding</span><span class="p">,</span> <span class="n">item_embeddings</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="n">DOT</span><span class="p">):</span>
+
+    <span class="n">u</span> <span class="o">=</span> <span class="n">query_embedding</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">item_embeddings</span>
+    <span class="k">if</span> <span class="n">measure</span> <span class="o">==</span> <span class="n">COSINE</span><span class="p">:</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">V</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scores</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">artist_neighbors</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">title_substring</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="n">DOT</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">ids</span> <span class="o">=</span>  <span class="n">artists</span><span class="p">[</span><span class="n">artists</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">title_substring</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">titles</span> <span class="o">=</span> <span class="n">artists</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">ids</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">titles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Found no artist with title </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">title_substring</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nearest neighbors of : </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">titles</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[Found more than one matching artist. Other candidates: </span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="mi">1</span><span class="p">:])))</span>
+    <span class="n">artistID</span> <span class="o">=</span> <span class="n">ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">compute_scores</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">embeddings</span><span class="p">[</span><span class="s2">&quot;artistID&quot;</span><span class="p">][</span><span class="n">artistID</span><span class="p">],</span> <span class="n">model</span><span class="o">.</span><span class="n">embeddings</span><span class="p">[</span><span class="s2">&quot;artistID&quot;</span><span class="p">],</span>
+        <span class="n">measure</span><span class="p">)</span>
+    <span class="n">score_key</span> <span class="o">=</span> <span class="n">measure</span> <span class="o">+</span> <span class="s1">&#39; score&#39;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="n">score_key</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span>
+        <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="n">artists</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+    <span class="p">})</span>
+    <span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="n">score_key</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artist_neighbors</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;Kanye&quot;</span><span class="p">,</span> <span class="n">DOT</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nearest neighbors of : Kanye West.
+[Found more than one matching artist. Other candidates: Kanye West &amp; Jay-Z, Kanye West, Beyoncé &amp; Charlie Wilson, Kanye West feat. Pusha T MpTri.Net, Eminem feat. Drake, Kanye West, Lil Wayne, The-Dream f. Kanye West, Jamie Foxx feat. Kanye West and The-Dream]
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dot score</th>
+      <th>names</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>325</th>
+      <td>8.141</td>
+      <td>Kanye West</td>
+    </tr>
+    <tr>
+      <th>1391</th>
+      <td>5.762</td>
+      <td>MGMT</td>
+    </tr>
+    <tr>
+      <th>1455</th>
+      <td>5.619</td>
+      <td>ABBA</td>
+    </tr>
+    <tr>
+      <th>3368</th>
+      <td>5.548</td>
+      <td>Antimatter</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>5.438</td>
+      <td>Depeche Mode</td>
+    </tr>
+    <tr>
+      <th>8454</th>
+      <td>5.398</td>
+      <td>Sick Animation</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artist_neighbors</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;Kanye&quot;</span><span class="p">,</span> <span class="n">COSINE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nearest neighbors of : Kanye West.
+[Found more than one matching artist. Other candidates: Kanye West &amp; Jay-Z, Kanye West, Beyoncé &amp; Charlie Wilson, Kanye West feat. Pusha T MpTri.Net, Eminem feat. Drake, Kanye West, Lil Wayne, The-Dream f. Kanye West, Jamie Foxx feat. Kanye West and The-Dream]
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cosine score</th>
+      <th>names</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>325</th>
+      <td>1.000</td>
+      <td>Kanye West</td>
+    </tr>
+    <tr>
+      <th>1999</th>
+      <td>0.684</td>
+      <td>Lacuna Coil</td>
+    </tr>
+    <tr>
+      <th>11453</th>
+      <td>0.671</td>
+      <td>Frontside</td>
+    </tr>
+    <tr>
+      <th>17430</th>
+      <td>0.633</td>
+      <td>Tagtraum</td>
+    </tr>
+    <tr>
+      <th>2164</th>
+      <td>0.629</td>
+      <td>50 Cent</td>
+    </tr>
+    <tr>
+      <th>469</th>
+      <td>0.626</td>
+      <td>Eminem</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_lowinit</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">user_artists</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">init_stddev</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">model_lowinit</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_iterations</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
+<span class="n">artist_neighbors</span><span class="p">(</span><span class="n">model_lowinit</span><span class="p">,</span> <span class="s2">&quot;Kanye&quot;</span><span class="p">,</span> <span class="n">DOT</span><span class="p">)</span>
+<span class="n">artist_neighbors</span><span class="p">(</span><span class="n">model_lowinit</span><span class="p">,</span> <span class="s2">&quot;Kanye&quot;</span><span class="p">,</span> <span class="n">COSINE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 1000: train_error=0.363502, test_error=2.011730Nearest neighbors of : Kanye West.
+[Found more than one matching artist. Other candidates: Kanye West &amp; Jay-Z, Kanye West, Beyoncé &amp; Charlie Wilson, Kanye West feat. Pusha T MpTri.Net, Eminem feat. Drake, Kanye West, Lil Wayne, The-Dream f. Kanye West, Jamie Foxx feat. Kanye West and The-Dream]
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dot score</th>
+      <th>names</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>325</th>
+      <td>5.193</td>
+      <td>Kanye West</td>
+    </tr>
+    <tr>
+      <th>282</th>
+      <td>3.924</td>
+      <td>Rihanna</td>
+    </tr>
+    <tr>
+      <th>300</th>
+      <td>3.651</td>
+      <td>Black Eyed Peas</td>
+    </tr>
+    <tr>
+      <th>739</th>
+      <td>3.549</td>
+      <td>Boards of Canada</td>
+    </tr>
+    <tr>
+      <th>1089</th>
+      <td>3.296</td>
+      <td>Björk</td>
+    </tr>
+    <tr>
+      <th>894</th>
+      <td>3.118</td>
+      <td>Amy Winehouse</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nearest neighbors of : Kanye West.
+[Found more than one matching artist. Other candidates: Kanye West &amp; Jay-Z, Kanye West, Beyoncé &amp; Charlie Wilson, Kanye West feat. Pusha T MpTri.Net, Eminem feat. Drake, Kanye West, Lil Wayne, The-Dream f. Kanye West, Jamie Foxx feat. Kanye West and The-Dream]
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cosine score</th>
+      <th>names</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>325</th>
+      <td>1.000</td>
+      <td>Kanye West</td>
+    </tr>
+    <tr>
+      <th>9469</th>
+      <td>0.747</td>
+      <td>Griffin House</td>
+    </tr>
+    <tr>
+      <th>9474</th>
+      <td>0.742</td>
+      <td>Ceumar</td>
+    </tr>
+    <tr>
+      <th>9472</th>
+      <td>0.728</td>
+      <td>8 Femmes</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>0.727</td>
+      <td>Worm Is Green</td>
+    </tr>
+    <tr>
+      <th>9466</th>
+      <td>0.709</td>
+      <td>Joan Baez</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/Colab part 2_20_4.png" src="_images/Colab part 2_20_4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gravity</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a gravity loss given two embedding matrices.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="o">*</span><span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">transpose_a</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">transpose_a</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">build_regularized_model</span><span class="p">(</span>
+    <span class="n">ratings</span><span class="p">,</span> 
+    <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+    <span class="n">regularization_coeff</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> 
+    <span class="n">gravity_coeff</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+    <span class="n">init_stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="c1"># Split the ratings DataFrame into train and test.</span>
+    <span class="n">train_ratings</span><span class="p">,</span> <span class="n">test_ratings</span> <span class="o">=</span> <span class="n">split_dataframe</span><span class="p">(</span><span class="n">ratings</span><span class="p">)</span>
+    <span class="c1"># SparseTensor representation of the train and test datasets.</span>
+    <span class="n">A_train</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor</span><span class="p">(</span><span class="n">train_ratings</span><span class="p">)</span>
+    <span class="n">A_test</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor</span><span class="p">(</span><span class="n">test_ratings</span><span class="p">)</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_normal</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">A_train</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">embedding_dim</span><span class="p">],</span> <span class="n">stddev</span><span class="o">=</span><span class="n">init_stddev</span><span class="p">))</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_normal</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">A_train</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">embedding_dim</span><span class="p">],</span> <span class="n">stddev</span><span class="o">=</span><span class="n">init_stddev</span><span class="p">))</span>
+
+    <span class="n">error_train</span> <span class="o">=</span> <span class="n">sparse_mean_square_error</span><span class="p">(</span><span class="n">A_train</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+    <span class="n">error_test</span> <span class="o">=</span> <span class="n">sparse_mean_square_error</span><span class="p">(</span><span class="n">A_test</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+    <span class="n">gravity_loss</span> <span class="o">=</span> <span class="n">gravity_coeff</span> <span class="o">*</span> <span class="n">gravity</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+    <span class="n">regularization_loss</span> <span class="o">=</span> <span class="n">regularization_coeff</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">U</span><span class="o">*</span><span class="n">U</span><span class="p">)</span><span class="o">/</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">V</span><span class="o">*</span><span class="n">V</span><span class="p">)</span><span class="o">/</span><span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">total_loss</span> <span class="o">=</span> <span class="n">error_train</span> <span class="o">+</span> <span class="n">regularization_loss</span> <span class="o">+</span> <span class="n">gravity_loss</span>
+    <span class="n">losses</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;train_error_observed&#39;</span><span class="p">:</span> <span class="n">error_train</span><span class="p">,</span>
+        <span class="s1">&#39;test_error_observed&#39;</span><span class="p">:</span> <span class="n">error_test</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">loss_components</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;observed_loss&#39;</span><span class="p">:</span> <span class="n">error_train</span><span class="p">,</span>
+        <span class="s1">&#39;regularization_loss&#39;</span><span class="p">:</span> <span class="n">regularization_loss</span><span class="p">,</span>
+        <span class="s1">&#39;gravity_loss&#39;</span><span class="p">:</span> <span class="n">gravity_loss</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">embeddings</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;userId&quot;</span><span class="p">:</span> <span class="n">U</span><span class="p">,</span> <span class="s2">&quot;artistID&quot;</span><span class="p">:</span> <span class="n">V</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">CFModel</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">total_loss</span><span class="p">,</span> <span class="p">[</span><span class="n">losses</span><span class="p">,</span> <span class="n">loss_components</span><span class="p">]),</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_model</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">build_regularized_model</span><span class="p">(</span>
+    <span class="n">user_artists</span><span class="p">,</span> <span class="n">regularization_coeff</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">gravity_coeff</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span>
+    <span class="n">init_stddev</span><span class="o">=</span><span class="mf">.05</span><span class="p">)</span>
+<span class="n">reg_model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_iterations</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">20.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> iteration 2000: train_error_observed=0.148426, test_error_observed=2.564600, observed_loss=0.148426, regularization_loss=0.468762, gravity_loss=0.191872
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;train_error_observed&#39;: 0.14842603, &#39;test_error_observed&#39;: 2.5646002},
+ {&#39;observed_loss&#39;: 0.14842603,
+  &#39;regularization_loss&#39;: 0.46876213,
+  &#39;gravity_loss&#39;: 0.19187193}]
+</pre></div>
+</div>
+<img alt="_images/Colab part 2_22_2.png" src="_images/Colab part 2_22_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artist_neighbors</span><span class="p">(</span><span class="n">reg_model</span><span class="p">,</span> <span class="s2">&quot;Kanye&quot;</span><span class="p">,</span> <span class="n">DOT</span><span class="p">)</span>
+<span class="n">artist_neighbors</span><span class="p">(</span><span class="n">reg_model</span><span class="p">,</span> <span class="s2">&quot;Kanye&quot;</span><span class="p">,</span> <span class="n">COSINE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nearest neighbors of : Kanye West.
+[Found more than one matching artist. Other candidates: Kanye West &amp; Jay-Z, Kanye West, Beyoncé &amp; Charlie Wilson, Kanye West feat. Pusha T MpTri.Net, Eminem feat. Drake, Kanye West, Lil Wayne, The-Dream f. Kanye West, Jamie Foxx feat. Kanye West and The-Dream]
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dot score</th>
+      <th>names</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>325</th>
+      <td>18.690</td>
+      <td>Kanye West</td>
+    </tr>
+    <tr>
+      <th>294</th>
+      <td>12.142</td>
+      <td>Katy Perry</td>
+    </tr>
+    <tr>
+      <th>894</th>
+      <td>12.032</td>
+      <td>Amy Winehouse</td>
+    </tr>
+    <tr>
+      <th>300</th>
+      <td>11.777</td>
+      <td>Black Eyed Peas</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>11.439</td>
+      <td>Lady Gaga</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>11.289</td>
+      <td>Radiohead</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nearest neighbors of : Kanye West.
+[Found more than one matching artist. Other candidates: Kanye West &amp; Jay-Z, Kanye West, Beyoncé &amp; Charlie Wilson, Kanye West feat. Pusha T MpTri.Net, Eminem feat. Drake, Kanye West, Lil Wayne, The-Dream f. Kanye West, Jamie Foxx feat. Kanye West and The-Dream]
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cosine score</th>
+      <th>names</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>325</th>
+      <td>1.000</td>
+      <td>Kanye West</td>
+    </tr>
+    <tr>
+      <th>12493</th>
+      <td>0.674</td>
+      <td>Timbaland feat. Keri Hilson &amp; D.O.E.</td>
+    </tr>
+    <tr>
+      <th>3959</th>
+      <td>0.670</td>
+      <td>Major Lazer</td>
+    </tr>
+    <tr>
+      <th>265</th>
+      <td>0.664</td>
+      <td>Mos Def</td>
+    </tr>
+    <tr>
+      <th>12489</th>
+      <td>0.653</td>
+      <td>Mary J Blige</td>
+    </tr>
+    <tr>
+      <th>3964</th>
+      <td>0.650</td>
+      <td>Penguin Prison</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Using%20the%20Recommender%20System.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Guideline to use the Basic Recommender System</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Lara Murphy<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

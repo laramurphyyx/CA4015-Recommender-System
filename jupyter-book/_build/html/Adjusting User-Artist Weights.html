@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adjusting User-Artist Weights &#8212; My sample book</title>
+    <title>Adjusting User-Artist Weights &#8212; CA4015 - Assignment 3 &amp; 4</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,7 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="LastFM Recommender System Assignment" href="Introduction.html" />
+    <link rel="next" title="Assigning Tags to Artists" href="Assigning%20tags%20to%20artists.html" />
+    <link rel="prev" title="Data Exploration" href="Data%20Exploration.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -77,7 +78,7 @@
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">My sample book</h1>
+      <h1 class="site-logo" id="site-title">CA4015 - Assignment 3 & 4</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -88,14 +89,39 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Introduction.html">
-   LastFM Recommender System Assignment
+   Background
   </a>
  </li>
 </ul>
 <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Data%20Exploration.html">
+   Data Exploration
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Adjusting User-Artist Weights
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Assigning%20tags%20to%20artists.html">
+   Assigning Tags to Artists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Basic%20Top%20Artists%20Recommender%20Workings.html">
+   Basic Recommender System Workings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Using%20the%20Recommender%20System.html">
+   Guideline to use the Basic Recommender System
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Colab%20part%202.html">
+   Tensorflow Recommender System
   </a>
  </li>
 </ul>
@@ -155,11 +181,11 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/laramurphyyx/CA4015-Recommender-System/tree/main/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FAdjusting User-Artist Weights.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/laramurphyyx/CA4015-Recommender-System/tree/main/jupyter-book/issues/new?title=Issue%20on%20page%20%2FAdjusting User-Artist Weights.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -180,7 +206,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Adjusting User-Artist Weights.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/laramurphyyx/CA4015-Recommender-System/master?urlpath=tree/docs/Adjusting User-Artist Weights.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -250,8 +276,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#removing-outliers-for-user-7">
-     Removing Outliers for User #7
+    <a class="reference internal nav-link" href="#removing-outliers-for-user-5">
+     Removing Outliers for User #5
     </a>
    </li>
   </ul>
@@ -318,11 +344,11 @@
     <span class="s1">&#39;user_artists&#39;</span><span class="p">]</span>
 
 <span class="n">file_names</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;../data/user_friends.dat&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;../data/user_taggedartists.dat&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;../data/artists.dat&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/user_friends.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/user_taggedartists.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/artists.csv&#39;</span><span class="p">,</span>
     <span class="s1">&#39;../data/tags.dat&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;../data/user_artists.dat&#39;</span><span class="p">]</span>
+    <span class="s1">&#39;../data/user_artists.csv&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -333,7 +359,7 @@
     <span class="k">if</span> <span class="n">dataframe</span> <span class="o">==</span> <span class="s1">&#39;tags&#39;</span><span class="p">:</span>
         <span class="nb">vars</span><span class="p">()[</span><span class="n">dataframe</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;latin-1&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">vars</span><span class="p">()[</span><span class="n">dataframe</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">vars</span><span class="p">()[</span><span class="n">dataframe</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -439,10 +465,10 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 <h2>Investigating 5 Users’ Distributions<a class="headerlink" href="#investigating-5-users-distributions" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribution of Weights for User #2&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribution of Weights for User #0&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -455,10 +481,10 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">6</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">4</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">42</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribution of Weights for User #6&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribution of Weights for User #4&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -471,10 +497,10 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">7</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">5</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribution of Weights for User #7&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribution of Weights for User #5&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -487,10 +513,10 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">700</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">652</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribution of Weights for User #700&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribution of Weights for User #652&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -503,10 +529,10 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2100</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1891</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribution of Weights for User #2100&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribution of Weights for User #1891&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -517,7 +543,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 <img alt="_images/Adjusting User-Artist Weights_22_0.png" src="_images/Adjusting User-Artist Weights_22_0.png" />
 </div>
 </div>
-<p>All of the above figures, for users #2, #6, #7, #700, #2100, have a long-tailed distribution.</p>
+<p>All of the above figures, for users #0, #4, #5, #652, #1891, have a long-tailed distribution.</p>
 <p>This makes the distribution of ratings slightly more tricky.</p>
 <p>Let’s investigate for some of these users, how they would be processed if treated like a normal distribution.</p>
 <p><a id=’plotting_mean_std’></a></p>
@@ -526,7 +552,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 <h2>Plotting the Mean and Standard Deviation on Users’ Weight Distribution<a class="headerlink" href="#plotting-the-mean-and-standard-deviation-on-users-weight-distribution" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="c1">## Assigning the mean and the standard deviation and then plotting them</span>
@@ -541,7 +567,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">std</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #2 with Mean and Standard Deviation&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #0 with Mean and Standard Deviation&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -554,7 +580,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">6</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">4</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span>
 
 <span class="c1">## Assigning the mean and the standard deviation and then plotting them</span>
@@ -569,7 +595,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">std</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #6 with Mean and Standard Deviation&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #4 with Mean and Standard Deviation&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -582,7 +608,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">7</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">5</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 <span class="n">mean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
@@ -596,7 +622,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">std</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #7 with Mean and Standard Deviation&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #5 with Mean and Standard Deviation&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -609,7 +635,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">700</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">652</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="c1">## Assigning the mean and the standard deviation and then plotting them</span>
@@ -624,7 +650,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">std</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #700 with Mean and Standard Deviation&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #652 with Mean and Standard Deviation&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -637,7 +663,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2100</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1891</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="c1">## Assigning the mean and the standard deviation and then plotting them</span>
@@ -652,7 +678,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">std</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #2100 with Mean and Standard Deviation&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #1891 with Mean and Standard Deviation&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -664,42 +690,42 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 </div>
 </div>
 <p>These five graphs show us that using the mean and standard deviation as a method to assign our-star ratings, it would have some key performance issues.</p>
-<p>This method does not prove very efficient as there are no occurrences of a 1-star rating for all users examined. It also does not apply to users who have outlier-like values, such as user #7 having one occurence of a weight above 40,000 which increases the standard deviation substantially, and results in majority of their weights belonging to the 3-star rating zone.</p>
-<p>This issue with user #7 could be solved with outlier exclusion. Excluding outliers will reduce the size of the standard deviation, allowing the assignment of ratings to be more spread out, which may solve the issue of 1-star ratings also.</p>
+<p>This method does not prove very efficient as there are no occurrences of a 1-star rating for all users examined. It also does not apply to users who have outlier-like values, such as user #5 having one occurence of a weight above 40,000 which increases the standard deviation substantially, and results in majority of their weights belonging to the 3-star rating zone.</p>
+<p>This issue with user #5 could be solved with outlier exclusion. Excluding outliers will reduce the size of the standard deviation, allowing the assignment of ratings to be more spread out, which may solve the issue of 1-star ratings also.</p>
 </div>
-<div class="section" id="removing-outliers-for-user-7">
-<h2>Removing Outliers for User #7<a class="headerlink" href="#removing-outliers-for-user-7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="removing-outliers-for-user-5">
+<h2>Removing Outliers for User #5<a class="headerlink" href="#removing-outliers-for-user-5" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user7</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">7</span><span class="p">]</span>
-<span class="n">user7_mean</span> <span class="o">=</span> <span class="n">user7</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">user7_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">user7</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user5</span> <span class="o">=</span> <span class="n">user_artists</span><span class="p">[</span><span class="n">user_artists</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">user5_mean</span> <span class="o">=</span> <span class="n">user5</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">user5_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">user5</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user7_adjusted</span> <span class="o">=</span> <span class="n">user7</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">user7</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">user7_mean</span><span class="p">)</span><span class="o">&lt;</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">user7_std</span><span class="p">)]</span>
-<span class="n">user7_mean_adjusted</span> <span class="o">=</span> <span class="n">user7_adjusted</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">user7_std_adjusted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">user7_adjusted</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user5_adjusted</span> <span class="o">=</span> <span class="n">user5</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">user5</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">user5_mean</span><span class="p">)</span><span class="o">&lt;</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">user5_std</span><span class="p">)]</span>
+<span class="n">user5_mean_adjusted</span> <span class="o">=</span> <span class="n">user5_adjusted</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">user5_std_adjusted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">user5_adjusted</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">user7_adjusted</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">user5_adjusted</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user7_mean_adjusted</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user7_mean_adjusted</span> <span class="o">-</span> <span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">user7_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user7_mean_adjusted</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">user7_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user7_mean_adjusted</span> <span class="o">-</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">user7_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user7_mean_adjusted</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">user7_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user7_mean_adjusted</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">user7_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user7_mean_adjusted</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">user7_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user5_mean_adjusted</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user5_mean_adjusted</span> <span class="o">-</span> <span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">user5_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user5_mean_adjusted</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">user5_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user5_mean_adjusted</span> <span class="o">-</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">user5_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user5_mean_adjusted</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">user5_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user5_mean_adjusted</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">user5_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">user5_mean_adjusted</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">user5_std_adjusted</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #7 with Mean and Standard Deviation (after outlier exclusion)&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Weight Distribution of User #5 with Mean and Standard Deviation (after outlier exclusion)&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Weight Values&#39;</span><span class="p">,</span>
     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency&#39;</span>
 <span class="p">);</span>
@@ -1102,7 +1128,121 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_artists</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/user_artists_ratings.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_artists</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userID</th>
+      <th>artistID</th>
+      <th>weight</th>
+      <th>rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>45</td>
+      <td>13883</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>46</td>
+      <td>11690</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>47</td>
+      <td>11351</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>48</td>
+      <td>10300</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>49</td>
+      <td>8983</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>92829</th>
+      <td>1891</td>
+      <td>17615</td>
+      <td>337</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>92830</th>
+      <td>1891</td>
+      <td>17616</td>
+      <td>297</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>92831</th>
+      <td>1891</td>
+      <td>17617</td>
+      <td>281</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>92832</th>
+      <td>1891</td>
+      <td>17618</td>
+      <td>280</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>92833</th>
+      <td>1891</td>
+      <td>17619</td>
+      <td>263</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>92834 rows × 4 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_artists</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/user_artists_ratings.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1140,14 +1280,23 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="Introduction.html" title="previous page">
+        <a class="left-prev" href="Data%20Exploration.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">LastFM Recommender System Assignment</p>
+                <p class="prevnext-title">Data Exploration</p>
             </div>
         </a>
     </div>
+     <div id="next">
+        <a class="right-next" href="Assigning%20tags%20to%20artists.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Assigning Tags to Artists</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         
@@ -1157,7 +1306,7 @@ This would be to assume a 25% split between 1-star, 2-star, 3-star and 4-star ra
     <div class="container">
       <p>
         
-          By The Jupyter Book Community<br/>
+          By Lara Murphy<br/>
         
             &copy; Copyright 2021.<br/>
       </p>
