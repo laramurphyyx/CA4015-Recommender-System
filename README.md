@@ -9,9 +9,9 @@ The assignment users recommender system algorithms using the Last.FM dataset to 
 The assignment follows this [tutorial](https://developers.google.com/machine-learning/recommendation) about Collaborative Filter Recommender Systems on the MovieLens dataset. 
 In addition to that tutotial, I have also implemented:
 
-    * A Basic Recommender System: A recommender system that will recommend artists based on their ratings/number of listeners
-    * A Content-Based Recommender System: A recommender system that will recommend artists based on their tags/name
-    * A method to Assign Star-Ratings to Artist: Identifying a suitable way to assign star ratings for each artist from the users
+* A Basic Recommender System: A recommender system that will recommend artists based on their ratings/number of listeners
+* A Content-Based Recommender System: A recommender system that will recommend artists based on their tags/name
+* A method to Assign Star-Ratings to Artist: Identifying a suitable way to assign star ratings for each artist from the users
 
 
 ## Repository Layout
