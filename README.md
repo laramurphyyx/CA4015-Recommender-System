@@ -20,3 +20,6 @@ The assignment follows this [tutorial](https://developers.google.com/machine-lea
 ## Deliverables
 
 The deliverable for this assignment is the complete jupyter book.
+
+The link to the interactive jupyter book is [here](https://laramurphyyx.github.io/CA4015-Recommender-System/Introduction.html)
+
