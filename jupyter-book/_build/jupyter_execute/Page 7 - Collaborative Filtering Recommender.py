@@ -39,7 +39,7 @@ pd.DataFrame.mask = mask
 pd.DataFrame.flatten_cols = flatten_cols
 
 
-# In[2]:
+# In[50]:
 
 
 user_artists = pd.read_csv('../data/user_artists_ratings.csv')
@@ -52,7 +52,7 @@ artists_tags = pd.read_csv('../data/artists_tags.csv')
 
 # ## Creating Functions to Build Sparse Tensor and Calculate MSE
 
-# In[3]:
+# In[22]:
 
 
 def build_rating_sparse_tensor(user_artists_df):
@@ -81,7 +81,7 @@ def sparse_mean_square_error(sparse_ratings, user_embeddings, music_embeddings):
 
 # ## Creating Functions to Build a Collaborative-Filtering Model
 
-# In[5]:
+# In[34]:
 
 
 class CFModel(object):
@@ -167,7 +167,7 @@ class CFModel(object):
             return results
 
 
-# In[6]:
+# In[25]:
 
 
 def build_model(ratings, embedding_dim=3, init_stddev=1.):
@@ -195,7 +195,7 @@ def build_model(ratings, embedding_dim=3, init_stddev=1.):
     return CFModel(embeddings, train_loss, [metrics])
 
 
-# In[7]:
+# In[26]:
 
 
 def split_dataframe(df, holdout_fraction=0.1):
@@ -207,7 +207,7 @@ def split_dataframe(df, holdout_fraction=0.1):
 
 # ## Building and Training the Model
 
-# In[8]:
+# In[40]:
 
 
 model = build_model(user_artists, embedding_dim=30, init_stddev=0.5)

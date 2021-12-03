@@ -309,9 +309,80 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\laram\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\compat\v2_compat.py:111: disable_resource_variables (from tensorflow.python.ops.variable_scope) is deprecated and will be removed in a future version.
-Instructions for updating:
-non-resource variables are not supported in the long term
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">MemoryError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_42252</span><span class="o">/</span><span class="mf">2519135230.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span> <span class="nn">sklearn.manifold</span>
+<span class="ne">---&gt; </span><span class="mi">13</span> <span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="kn">from</span> <span class="nn">._api.v2</span> <span class="kn">import</span> <span class="n">autograph</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="kn">from</span> <span class="nn">._api.v2</span> <span class="kn">import</span> <span class="n">bitwise</span>
+<span class="ne">---&gt; </span><span class="mi">55</span> <span class="kn">from</span> <span class="nn">._api.v2</span> <span class="kn">import</span> <span class="n">compat</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="kn">from</span> <span class="nn">._api.v2</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="kn">from</span> <span class="nn">._api.v2</span> <span class="kn">import</span> <span class="n">data</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">autograph</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">bitwise</span>
+<span class="ne">---&gt; </span><span class="mi">34</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">compat</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">data</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="n">compat</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="kn">import</span> <span class="nn">sys</span> <span class="k">as</span> <span class="nn">_sys</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> 
+<span class="ne">---&gt; </span><span class="mi">39</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">v1</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">v2</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span> <span class="kn">from</span> <span class="nn">tensorflow.python.compat.compat</span> <span class="kn">import</span> <span class="n">forward_compatibility_horizon</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v2.compat.v1</span> <span class="kn">import</span> <span class="n">layers</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v2.compat.v1</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="ne">---&gt; </span><span class="mi">51</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v2.compat.v1</span> <span class="kn">import</span> <span class="n">lite</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v2.compat.v1</span> <span class="kn">import</span> <span class="n">logging</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v2.compat.v1</span> <span class="kn">import</span> <span class="n">lookup</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="n">lite</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> 
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">experimental</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python.lite</span> <span class="kn">import</span> <span class="n">Interpreter</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python.lite</span> <span class="kn">import</span> <span class="n">OpHint</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="n">lite</span>\<span class="n">experimental</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">_api</span>\<span class="n">v2</span>\<span class="n">compat</span>\<span class="n">v1</span>\<span class="n">lite</span>\<span class="n">experimental</span>\<span class="n">authoring</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">import</span> <span class="nn">sys</span> <span class="k">as</span> <span class="nn">_sys</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> 
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python.authoring.authoring</span> <span class="kn">import</span> <span class="n">compatible</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> 
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">del</span> <span class="n">_print_function</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">lite</span>\<span class="n">python</span>\<span class="n">authoring</span>\<span class="n">authoring</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="c1"># pylint: disable=g-import-not-at-top</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python</span> <span class="kn">import</span> <span class="n">convert</span>
+<span class="ne">---&gt; </span><span class="mi">44</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python</span> <span class="kn">import</span> <span class="n">lite</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="kn">from</span> <span class="nn">tensorflow.lite.python.metrics_wrapper</span> <span class="kn">import</span> <span class="n">converter_error_data_pb2</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="kn">from</span> <span class="nn">tensorflow.python.util.tf_export</span> <span class="kn">import</span> <span class="n">tf_export</span> <span class="k">as</span> <span class="n">_tf_export</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">lite</span>\<span class="n">python</span>\<span class="n">lite</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Continuum</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">ca4015</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">tensorflow</span>\<span class="n">lite</span>\<span class="n">experimental</span>\<span class="n">microfrontend</span>\<span class="n">python</span>\<span class="n">ops</span>\<span class="n">audio_microfrontend_op</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="kn">from</span> <span class="nn">tensorflow.python.util.tf_export</span> <span class="kn">import</span> <span class="n">tf_export</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> 
+<span class="ne">---&gt; </span><span class="mi">29</span> <span class="n">_audio_microfrontend_op</span> <span class="o">=</span> <span class="n">load_library</span><span class="o">.</span><span class="n">load_op_library</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="n">resource_loader</span><span class="o">.</span><span class="n">get_path_to_datafile</span><span class="p">(</span><span class="s2">&quot;_audio_microfrontend_op.so&quot;</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> 
+
+<span class="nn">~\AppData\Local\Continuum\anaconda3\envs\ca4015\lib\site-packages\tensorflow\python\framework\load_library.py</span> in <span class="ni">load_op_library</span><span class="nt">(library_filename)</span>
+
+<span class="ne">MemoryError</span>: bad allocation
 </pre></div>
 </div>
 </div>
@@ -497,24 +568,6 @@ non-resource variables are not supported in the long term
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">user_artists</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">init_stddev</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_iterations</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_35908</span><span class="o">/</span><span class="mf">460896045.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">user_artists</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">init_stddev</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_iterations</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
-
-<span class="nn">~\AppData\Local\Temp/ipykernel_35908/3999473338.py</span> in <span class="ni">build_model</span><span class="nt">(ratings, embedding_dim, init_stddev)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">train_ratings</span><span class="p">,</span> <span class="n">test_ratings</span> <span class="o">=</span> <span class="n">split_dataframe</span><span class="p">(</span><span class="n">ratings</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="c1"># SparseTensor representation of the train and test datasets.</span>
-<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">A_train</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor_ratings</span><span class="p">(</span><span class="n">train_ratings</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">A_test</span> <span class="o">=</span> <span class="n">build_rating_sparse_tensor_ratings</span><span class="p">(</span><span class="n">test_ratings</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="c1"># Initialize the embeddings using a normal distribution.</span>
-
-<span class="ne">NameError</span>: name &#39;build_rating_sparse_tensor_ratings&#39; is not defined
 </pre></div>
 </div>
 </div>
