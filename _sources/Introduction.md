@@ -16,6 +16,8 @@ There are several approaches that can be taken to build a recommender system. So
 
 * <b>Hybrid Approach</b>: This approach is a combination of collaborative filtering and content-based recommenders. This can be quite difficult to implement, although when optimized, can outperform both methods of recommending.
 
+The first three approaches have been represented in this assignment.
+
 ## About the Data used in our Recommender System
 
 Our Recommender System is based on artists from the LastFM dataset.
@@ -31,3 +33,13 @@ The LastFM dataset contains information about 92,800 artists and 1,892 users. Th
 The dataset also includes a readme file to provide context and further explanation on the information contained in each file. 
 
 This dataset is available through [this link](https://grouplens.org/datasets/hetrec-2011/), or you can download it directly by clicking [here](http://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-2k.zip).
+
+## Encountered Bugs/Errors
+
+The following errors should be noted when reading the jupyter book:
+
+1. There is a bug where the last page disappears from the page navigation panel on the left of the jupyter book. The last page 'Using the Recommender Systems' appears when you have the 'Background' page open, although will disappear once you access another page.
+
+2. There is a keyboard interrupt error that occasionally occurs when running the 'Content-Based Recommender System' or the 'Collaborative Filtering Recommender System', possibly due to a timeout. This can be seen in the PDF but does not occur in the notebook in the repository.
+
+3. There is a memory issue when trying to run the content-based recommender system from a function, in 'Using the Recommender Systems'. This may work if ran locally on a different machine, but examples are given in the preceding notebook 'Content-Based Recommender'.

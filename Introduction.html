@@ -51,7 +51,6 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Exploration" href="Data%20Exploration.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -86,41 +85,46 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1 current">
-  <a class="reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%201%20-%20Introduction.html">
    Background
   </a>
  </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="Data%20Exploration.html">
+  <a class="reference internal" href="Page%202%20-%20Data%20Exploration.html">
    Data Exploration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Adjusting%20User-Artist%20Weights.html">
+  <a class="reference internal" href="Page%203%20-%20Adjusting%20User-Artist%20Weights.html">
    Adjusting User-Artist Weights
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Assigning%20tags%20to%20artists.html">
+  <a class="reference internal" href="Page%204%20-%20Assigning%20Tags%20to%20Artists.html">
    Assigning Tags to Artists
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Basic%20Top%20Artists%20Recommender%20Workings.html">
-   Basic Recommender System Workings
+  <a class="reference internal" href="Page%205%20-%20Basic%20Recommender.html">
+   Basic Recommender System
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Using%20the%20Recommender%20System.html">
-   Guideline to use the Basic Recommender System
+  <a class="reference internal" href="Page%206%20-%20Content-Based%20Recommender.html">
+   Content-Based Recommender System
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Colab%20part%202.html">
-   Tensorflow Recommender System
+  <a class="reference internal" href="Page%207%20-%20Collaborative%20Filtering%20Recommender.html">
+   Collaborative Filtering Recommender System
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Page%208%20-%20Using%20the%20Recommender%20Systems.html">
+   Using the Recommender Systems
   </a>
  </li>
 </ul>
@@ -225,6 +229,11 @@
    About the Data used in our Recommender System
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encountered-bugs-errors">
+   Encountered Bugs/Errors
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -251,6 +260,7 @@
 <li><p><b>Content-Based Recommenders</b>: This approach uses the item’s metadata, for example the metadata held for a movie would be it’s genre, director, description or actors. This algorithm identifies the genres/directors/actors that a user generally likes, and uses this as a guide for future recommendations.</p></li>
 <li><p><b>Hybrid Approach</b>: This approach is a combination of collaborative filtering and content-based recommenders. This can be quite difficult to implement, although when optimized, can outperform both methods of recommending.</p></li>
 </ul>
+<p>The first three approaches have been represented in this assignment.</p>
 </div>
 <div class="section" id="about-the-data-used-in-our-recommender-system">
 <h2>About the Data used in our Recommender System<a class="headerlink" href="#about-the-data-used-in-our-recommender-system" title="Permalink to this headline">¶</a></h2>
@@ -267,7 +277,14 @@ The LastFM dataset contains information about 92,800 artists and 1,892 users. Th
 <p>The dataset also includes a readme file to provide context and further explanation on the information contained in each file.</p>
 <p>This dataset is available through <a class="reference external" href="https://grouplens.org/datasets/hetrec-2011/">this link</a>, or you can download it directly by clicking <a class="reference external" href="http://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-2k.zip">here</a>.</p>
 </div>
-<div class="toctree-wrapper compound">
+<div class="section" id="encountered-bugs-errors">
+<h2>Encountered Bugs/Errors<a class="headerlink" href="#encountered-bugs-errors" title="Permalink to this headline">¶</a></h2>
+<p>The following errors should be noted when reading the jupyter book:</p>
+<ol class="simple">
+<li><p>There is a bug where the last page disappears from the page navigation panel on the left of the jupyter book. The last page ‘Using the Recommender Systems’ appears when you have the ‘Background’ page open, although will disappear once you access another page.</p></li>
+<li><p>There is a keyboard interrupt error that occasionally occurs when running the ‘Content-Based Recommender System’ or the ‘Collaborative Filtering Recommender System’, possibly due to a timeout. This can be seen in the PDF but does not occur in the notebook in the repository.</p></li>
+<li><p>There is a memory issue when trying to run the content-based recommender system from a function, in ‘Using the Recommender Systems’. This may work if ran locally on a different machine, but examples are given in the preceding notebook ‘Content-Based Recommender’.</p></li>
+</ol>
 </div>
 </div>
 
@@ -300,15 +317,6 @@ The LastFM dataset contains information about 92,800 artists and 1,892 users. Th
 
 <div class='prev-next-bottom'>
     
-     <div id="next">
-        <a class="right-next" href="Data%20Exploration.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Data Exploration</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
 
 </div>
         
